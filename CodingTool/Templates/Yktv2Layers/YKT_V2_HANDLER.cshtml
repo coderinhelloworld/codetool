@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using Bussiness.Sys;
+using Bussiness.Utils;
+using Entity;
+using Entity.Enums;
+using Entity.Sys;
+using YKTDispenser.Utils;
+
+namespace YKTDispenser.Handlers.ExtraMenu
+{
+    /// <summary>
+    /// ExMenuInfoHandler 的摘要说明
+    /// </summary>
+    public class @(Model.TableName)Handler : BaseHttpHandler
+    {
+        private @(Model.TableName)Bo _@(Model.TableName)Bo = new @(Model.TableName)Bo();
+        
+        /// <summary>
+        /// 查询。
+        /// </summary>
+        /// <returns></returns>
+        [HttpMethod(RequestMethod.Post, "查找")]
+        public ActionResult Index()
+        {
+            ActionResult model = new ActionResult();
+            PageDataIn pdi = base.GetDefaultPDM();
+            PageDataOut pdo = _@(Model.TableName)Bo.GetPageObject(pdi);
+            model.SetData(WebHelper.SerializePageDataOut(pdo));
+            return model;
+        }
+
+        [HttpMethod(RequestMethod.Post, "保存")]
+        public ActionResult Save()
+        {
+            ActionResult model = new ActionResult();
+            try
+            {
+                var entity = base.BuildEntity<@(Model.TableName)Eo>();
+                entity.Id = Guid.NewGuid().ToString("N");
+                _@(Model.TableName)Bo.SaveOrUpdate(entity);                
+            }
+            catch (Exception e)
+            {
+                model.SetError(e.Message.ToString());
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <returns></returns>
+        [HttpMethod(RequestMethod.Post, "更新")]
+        public ActionResult Update()
+        {
+            ActionResult model = new ActionResult();
+            try
+            {
+                var entity = _@(Model.TableName)Bo.LoadById(base.GetReqItem("Editor-Id"));
+                base.FillObject(entity);
+                _@(Model.TableName)Bo.SaveOrUpdate(entity);                
+            }
+            catch (Exception e)
+            {
+                model.SetError(e.Message.ToString());
+            }
+
+            return model;
+        }
+        
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <returns></returns>
+        [HttpMethod(RequestMethod.Post, "删除")]
+        public ActionResult Delete()
+        {
+            ActionResult model = new ActionResult();
+            try
+            {
+                var id = base.GetSelectedKey();
+                if (string.IsNullOrEmpty(id))
+                {
+                    model.SetError("请选择项目");
+                    return model;
+                }
+                _@(Model.TableName)Bo.DeleteById(id);                
+            }
+            catch (Exception e)
+            {
+                model.SetError(e.Message.ToString());
+            }
+
+            return model;
+        }
+
+        public bool IsReusable
+        {
+            get { return false; }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+using System;
+using Entity.Enums;
+using TcSoft.Util.Attri.TableAttri;
+
+namespace Entity.Sys
+{
+    /// <summary>
+    /// 额外菜单信息
+    /// </summary>
+    [Table("@(Model.TableName)", "额外菜单信息")]
+    [Serializable]
+    public class @(Model.TableName)Eo : FrameEo
+    {
+        /// <summary>
+        /// 主键ID
+        /// </summary>
+        [Column("ID", "主键ID")]
+        public string Id { get; set; }
+
+       @foreach (var field in Model.Fields)
+       {
+                @("\t\t/// <summary>\r\n\t\t/// "+@field.Title + "\r\n\t\t/// </summary>\r\n") 
+                @($"\t\t [Column("{field.Title}", "{field.Title}")]") 
+                @("\t\tpublic string" + field.Name + " { get; set; }\r\n\r\n")   
+       }     
+    }
+}

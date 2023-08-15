@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="CodingTool.Views.Pages.GenerateSqlByYktv2Class"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CodingTool.Views.Pages"
+             mc:Ignorable="d">
+    <Grid       HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"  ShowGridLines="False" Height="auto" Background="Azure" Margin="20" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="10"
+            FontSize="15">
+            输入内容：
+        </TextBlock>
+        <TextBox
+            Margin="10"
+            Grid.Row="0"
+            MinHeight="200"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            materialDesign:HintAssist.Hint="Multiline text"
+            AcceptsReturn="True"
+            SpellCheck.IsEnabled="True"
+            Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="10"
+            FontSize="15">
+            输出内容：
+        </TextBlock>
+        <TextBox
+            Grid.Row="1"
+            Margin="10"
+            MinHeight="200"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            materialDesign:HintAssist.Hint="Multiline text"
+            AcceptsReturn="True"
+            SpellCheck.IsEnabled="True"
+            Text="{Binding OutputText, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            Width="auto"
+            MaxWidth="200"
+            Margin="20"
+            Command="{Binding Yktv2SqlGenerateCommand}"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="生成一卡通V2对应的不同层下的代码">
+            <TextBlock Text="成表sql语句" />
+        </Button>
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            MaxWidth="150"
+            Width="auto"
+            Margin="20"
+            Command="{Binding GenerateTestMethodsCommand}"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="类生成测试方法">
+            <TextBlock Text="类生成测试方法" />
+        </Button>
+        <Grid Grid.Row="6" Grid.Column="1" />
+    </Grid>
+</UserControl>
