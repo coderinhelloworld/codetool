@@ -40,7 +40,7 @@ namespace CodingTool.Views.Controls
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            if (((SubItem)((ListView)sender).SelectedItem) != null)
             {
                 _context.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
                 var listView = sender as ListView;
@@ -54,10 +54,7 @@ namespace CodingTool.Views.Controls
                         }
                     }
             }
-            catch (Exception exception)
-            {
-                //ignore
-            }
+
         }
     }
 }
