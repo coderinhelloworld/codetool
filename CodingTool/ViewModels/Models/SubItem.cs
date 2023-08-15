@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace CodingTool.ViewModels.Models
 {
@@ -15,6 +16,7 @@ namespace CodingTool.ViewModels.Models
             Screen = screen;
         }
         public string Name { get; private set; }
+        public string Color { get; set; }
         public UserControl Screen { get; private set; }
     }
 }

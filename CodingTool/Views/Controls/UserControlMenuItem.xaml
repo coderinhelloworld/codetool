@@ -35,10 +35,12 @@
                 Foreground="White"
                 ItemsSource="{Binding SubItems}"                
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"   
-                SelectionChanged="ListViewMenu_SelectionChanged">
+                SelectionChanged="ListViewMenu_SelectionChanged" 
+                Background="{Binding Color}"
+                >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Padding="20,5" Text="{Binding Name}" />
+                        <TextBlock Padding="20,5" Text="{Binding Name}" Background="{Binding Color}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
