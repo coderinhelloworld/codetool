@@ -33,12 +33,14 @@ namespace CodingTool.Views.Controls
 
             _context = context;
 
+
             ExpanderMenu.Visibility = itemMenu.SubItems == null ? Visibility.Collapsed : Visibility.Visible;
 
             ListViewItemMenu.Visibility = itemMenu.SubItems == null ? Visibility.Visible : Visibility.Collapsed;
 
             this.DataContext = itemMenu;
             _itemMenu= itemMenu;
+            //_itemMenu.IconColor = "120, 120, 120";
         }
 
         public void SetIconColor(string color)
@@ -65,7 +67,7 @@ namespace CodingTool.Views.Controls
                             }
                             else
                             {
-                                lvi.Background = new SolidColorBrush(Color.FromRgb(237, 23, 108));
+                                lvi.Background = new SolidColorBrush(Color.FromRgb(165, 165, 165));
                             }
                             lvi.IsSelected = false; 
                         }
@@ -77,6 +79,7 @@ namespace CodingTool.Views.Controls
             var listViewSelected = sender as ListView;
             foreach (var item in Globals.MenuListViews)
             {
+                item.SetIconColor("Blue");
                 if (item is UserControlMenuItem)
                 {
                     var listView = ((UserControlMenuItem)item).ListViewMenu;

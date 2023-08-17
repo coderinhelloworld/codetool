@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace CodingTool.Views.Pages
 {
     /// <summary>
-    /// Yktv2AllLayersGenerate.xaml 的交互逻辑
+    /// TestPage.xaml 的交互逻辑
     /// </summary>
-    public partial class Yktv2AllLayersGenerate : UserControl
+    public partial class TestPage : UserControl
     {
-        public Yktv2AllLayersGenerate()
+        public TestPage()
         {
             InitializeComponent();
-            this.Background = new SolidColorBrush(Colors.Azure);
         }
     }
 }

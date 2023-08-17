@@ -32,15 +32,17 @@
             IsExpanded="False">
             <ListView
                 x:Name="ListViewMenu"
-                Foreground="White"
-                ItemsSource="{Binding SubItems}"                
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"   
-                SelectionChanged="ListViewMenu_SelectionChanged" 
                 Background="{Binding Color}"
-                >
+                Foreground="White"
+                ItemsSource="{Binding SubItems}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                SelectionChanged="ListViewMenu_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Padding="20,5" Text="{Binding Name}" Background="{Binding Color}" />
+                        <TextBlock
+                            Padding="20,5"
+                            Background="{Binding Color}"
+                            Text="{Binding Name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -49,6 +49,25 @@ namespace CodingTool.ViewModels
             {
                 OutputText = CodeGenerate.GenerateTestMethods(InputText);
             });
+            CloseWindowCommand=new CommandBase(_ =>
+            {
+                Application.Current.Shutdown();
+            });
+            MiniWindowCommand=new CommandBase(_ =>
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            });
+            MaximizedWindowCommand=new CommandBase(_ =>
+            {
+                if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+                {
+                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                }
+                else
+                {
+                    Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                }
+            });
         }
         public string SelectFileWpf()
         {
@@ -98,7 +117,9 @@ namespace CodingTool.ViewModels
         
         public CommandBase GenerateTestMethodsCommand { get; }
 
-
+        public CommandBase CloseWindowCommand { get; set; }
+        public CommandBase MiniWindowCommand { get; set; }
+        public CommandBase MaximizedWindowCommand { get; set; }
 
 
         private GenerateCodeModel _generateCodeModel;
