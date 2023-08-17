@@ -53,9 +53,6 @@ namespace CodingTool
             {
                 Menu.Children.Add(menuItem);
             }
-            // Menu.Children.Add(new UserControlMenuItem(menu1, this));
-            // Menu.Children.Add(new UserControlMenuItem(menu2, this));
-            // Menu.Children.Add(new UserControlMenuItem(menu3, this));
         }
         internal void SwitchScreen(object sender)
         {
@@ -75,12 +72,6 @@ namespace CodingTool
             {
                 this.DragMove();
             }
-        }
-
-
-        private void PackIcon_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 
