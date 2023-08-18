@@ -59,69 +59,69 @@ namespace CodingTool.Functions
         }
 
 
-        public static string Generate(GenerateCodeModel generateCodeModel, string inputText)
-        {
-            var tableNameList = generateCodeModel.TableName.Split(' ');
-            var tableExplain = "";
-            if (tableNameList.Count() > 1)
-            {
-                tableExplain = tableNameList.Where(x => !x.IsNullOrEmpty()).Last();
-            }
+//        public static string Generate(GenerateCodeModel generateCodeModel, string inputText)
+//        {
+//            var tableNameList = generateCodeModel.TableName.Split(' ');
+//            var tableExplain = "";
+//            if (tableNameList.Count() > 1)
+//            {
+//                tableExplain = tableNameList.Where(x => !x.IsNullOrEmpty()).Last();
+//            }
 
-            var tableName = tableNameList[0].ToPascal();
-
-
-            var col = 1;
-            var sb = new StringBuilder();
-            var textList = inputText.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
-            if (textList.Count() == 1)
-            {
-                textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
-            }
-
-            sb.AppendLine($@"[Table(""{tableName.ToUnderlineNaming().ToUpper()}"", ""{tableExplain}"")]
-[Serializable]
-public class {tableName}Eo : FrameEo {{ ");
-            foreach (var text in textList)
-            {
-                var items = text.Split('\t').ToList();
-                if (items.Count == 1)
-                {
-                    items = text.Split(' ').ToList();
-                }
-
-                items = items.Where(x => x != "").ToList();
-                if (items.Count > 0)
-                {
-                    sb.AppendLine("/// <summary>");
-                    sb.AppendLine($"/// {items[col]}");
-                    sb.AppendLine("/// </summary>");
-                    sb.AppendLine(
-                        $"[Column(\"{items[0].ToPascal().ToUnderlineNaming().ToUpper()}\", \"{items[col]}\")]");
-                    sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
-                    sb.AppendLine();
-                }
-            }
-
-            sb.AppendLine("}");
-
-            var entityClassStr = sb.ToString();
-            GenerateEntityClass(generateCodeModel, entityClassStr);
-            return sb.ToString();
-        }
+//            var tableName = tableNameList[0].ToPascal();
 
 
-        private static void GenerateEntityClass(GenerateCodeModel generateCodeModel, string classStr)
-        {
-            //根据generateCodeModel.EntityPath生成txt文件
+//            var col = 1;
+//            var sb = new StringBuilder();
+//            var textList = inputText.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+//            if (textList.Count() == 1)
+//            {
+//                textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
+//            }
 
-            if (!Directory.Exists(generateCodeModel.EntityPath))
-            {
-                Directory.CreateDirectory(generateCodeModel.EntityPath);
-            }
+//            sb.AppendLine($@"[Table(""{tableName.ToUnderlineNaming().ToUpper()}"", ""{tableExplain}"")]
+//[Serializable]
+//public class {tableName}Eo : FrameEo {{ ");
+//            foreach (var text in textList)
+//            {
+//                var items = text.Split('\t').ToList();
+//                if (items.Count == 1)
+//                {
+//                    items = text.Split(' ').ToList();
+//                }
 
-            File.WriteAllText(generateCodeModel.EntityPath + "/" + generateCodeModel.TableName + ".cs", classStr);
-        }
+//                items = items.Where(x => x != "").ToList();
+//                if (items.Count > 0)
+//                {
+//                    sb.AppendLine("/// <summary>");
+//                    sb.AppendLine($"/// {items[col]}");
+//                    sb.AppendLine("/// </summary>");
+//                    sb.AppendLine(
+//                        $"[Column(\"{items[0].ToPascal().ToUnderlineNaming().ToUpper()}\", \"{items[col]}\")]");
+//                    sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
+//                    sb.AppendLine();
+//                }
+//            }
+
+//            sb.AppendLine("}");
+
+//            var entityClassStr = sb.ToString();
+//            GenerateEntityClass(generateCodeModel, entityClassStr);
+//            return sb.ToString();
+//        }
+
+
+//        private static void GenerateEntityClass(GenerateCodeModel generateCodeModel, string classStr)
+//        {
+//            //根据generateCodeModel.EntityPath生成txt文件
+
+//            if (!Directory.Exists(generateCodeModel.EntityPath))
+//            {
+//                Directory.CreateDirectory(generateCodeModel.EntityPath);
+//            }
+
+//            File.WriteAllText(generateCodeModel.EntityPath + "/" + generateCodeModel.TableName + ".cs", classStr);
+//        }
 
 
         /// <summary>
@@ -297,6 +297,51 @@ public class {tableName}Eo : FrameEo {{ ");
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// 通过字段名生成类
+        /// </summary>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
+
+        internal static string GenerateClassByProerty(string inputText)
+        {
+            try
+            {
+                var className = "Class1";                
+
+                var col =1;
+                var sb = new StringBuilder();
+                var textList = inputText.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+                if (textList.Count() == 1)
+                {
+                    textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
+                }
+                sb.AppendLine($"public class {className} {{ \n");
+                foreach (var text in textList)
+                {
+                    var items = text.Split('\t');
+                    if (items.Length == 1)
+                    {
+                        items = text.Split(' ');
+                    }
+                    if (text.IsNotNullOrEmpty() && items.Length > 0)
+                    {
+                        sb.AppendLine("/// <summary>");
+                        sb.AppendLine($"/// {items[col]}");
+                        sb.AppendLine("/// </summary>");
+                        sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
+                        sb.AppendLine();
+                    }
+                }
+                sb.AppendLine("}");
+                return sb.ToString();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

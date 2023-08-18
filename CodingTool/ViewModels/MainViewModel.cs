@@ -20,6 +20,21 @@ namespace CodingTool.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        /// <summary>
+        ///生成代码命令及相关字段
+        /// </summary>
+
+        public CommandBase CodeGenerateCommand { get; }
+        public CommandBase Yktv2SqlGenerateCommand { get; }
+        public CommandBase ImgToIcoCommand { get; }
+        public CommandBase ChooseFileCommand { get; }
+
+        public CommandBase GenerateTestMethodsCommand { get; }
+
+        public CommandBase CloseWindowCommand { get; set; }
+        public CommandBase MiniWindowCommand { get; set; }
+        public CommandBase MaximizedWindowCommand { get; set; }
+        public CommandBase GenetateClassByProertyCommand { get; set; }
 
         public MainViewModel()
         {
@@ -49,7 +64,10 @@ namespace CodingTool.ViewModels
             {
                 OutputText = CodeGenerate.GenerateTestMethods(InputText);
             });
-            CloseWindowCommand=new CommandBase(_ =>
+
+            #region 界面类
+            #endregion
+            CloseWindowCommand = new CommandBase(_ =>
             {
                 Application.Current.Shutdown();
             });
@@ -68,6 +86,13 @@ namespace CodingTool.ViewModels
                     Application.Current.MainWindow.WindowState = WindowState.Maximized;
                 }
             });
+
+
+            GenetateClassByProertyCommand=new CommandBase(_ =>
+            {
+                OutputText = CodeGenerate.GenerateClassByProerty(InputText);
+            });
+
         }
         public string SelectFileWpf()
         {
@@ -106,20 +131,7 @@ namespace CodingTool.ViewModels
             set => SetProperty(ref _outputText, value);
         }
 
-        /// <summary>
-        ///生成代码命令及相关字段
-        /// </summary>
 
-        public CommandBase CodeGenerateCommand { get; }
-        public CommandBase Yktv2SqlGenerateCommand { get; }
-        public CommandBase ImgToIcoCommand { get; }
-        public CommandBase ChooseFileCommand { get; }
-        
-        public CommandBase GenerateTestMethodsCommand { get; }
-
-        public CommandBase CloseWindowCommand { get; set; }
-        public CommandBase MiniWindowCommand { get; set; }
-        public CommandBase MaximizedWindowCommand { get; set; }
 
 
         private GenerateCodeModel _generateCodeModel;

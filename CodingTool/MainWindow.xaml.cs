@@ -34,7 +34,8 @@ namespace CodingTool
             var menuCode = new List<SubItem>();
             menuCode.Add(new SubItem("Yktv2 分层代码生成", new Yktv2AllLayersGenerate()));
             menuCode.Add(new SubItem("通过类生成代码", new GenerateSqlByYktv2Class()));
-            menuCode.Add(new SubItem("测试页面", new TestPage()));
+            menuCode.Add(new SubItem("通过字段生成代码", new GenerateClassByProperty()));
+            //menuCode.Add(new SubItem("测试页面", new TestPage()));
             var menu1 = new ItemMenu("代码生成器", menuCode, PackIconKind.SharkFin);
             Globals.MenuListViews.Add(new UserControlMenuItem(menu1,this));
 

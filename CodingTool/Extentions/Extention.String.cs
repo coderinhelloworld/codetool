@@ -490,6 +490,16 @@ namespace CodingTool.Extentions
             Enum.TryParse(enumText, out TEnum value);
             return value;
         }
+
+        /// <summary>
+        /// 是否不为空字符串
+        /// </summary>
+        /// <param name="pwd">密码</param>
+        /// <returns></returns>
+        public static bool IsNotNullOrEmpty(this string str)
+        {
+            return !string.IsNullOrEmpty(str);
+        }
         /// <summary>
         /// 是否为空字符串
         /// </summary>
