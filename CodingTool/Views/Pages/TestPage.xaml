@@ -7,37 +7,35 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <DataGrid>
-        <DataGrid.Columns>
-            <DataGridTemplateColumn>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Button
-                                Grid.Column="0"
-                                HorizontalAlignment="Stretch"
-                                Content="Button 1" />
-                            <Button
-                                Grid.Column="1"
-                                HorizontalAlignment="Stretch"
-                                Content="Button 2" />
-                        </Grid>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-        <DataGrid.RowDetailsTemplate>
-            <DataTemplate>
-                <TextBlock Text="Row Details" />
-            </DataTemplate>
-        </DataGrid.RowDetailsTemplate>
-    </DataGrid>
+    <Grid
+        Height="auto"
+        Margin="20"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Background="Azure"
+        ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="auto"
+            MaxWidth="150"
+            Margin="20"
+            HorizontalAlignment="Stretch"
+             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"           
+            ToolTip="类生成测试方法">
+            <TextBlock Text="类生成测试方法" />
+            <Button.CommandParameter>
+                测试中
+            </Button.CommandParameter>
+        </Button>
+    </Grid>
 </UserControl>

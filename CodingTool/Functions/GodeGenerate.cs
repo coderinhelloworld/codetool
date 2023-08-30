@@ -1,5 +1,6 @@
 ﻿using CodingTool.Extentions;
 using CodingTool.ViewModels.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,72 +58,6 @@ namespace CodingTool.Functions
                 return inputPath;
             }
         }
-
-
-//        public static string Generate(GenerateCodeModel generateCodeModel, string inputText)
-//        {
-//            var tableNameList = generateCodeModel.TableName.Split(' ');
-//            var tableExplain = "";
-//            if (tableNameList.Count() > 1)
-//            {
-//                tableExplain = tableNameList.Where(x => !x.IsNullOrEmpty()).Last();
-//            }
-
-//            var tableName = tableNameList[0].ToPascal();
-
-
-//            var col = 1;
-//            var sb = new StringBuilder();
-//            var textList = inputText.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
-//            if (textList.Count() == 1)
-//            {
-//                textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
-//            }
-
-//            sb.AppendLine($@"[Table(""{tableName.ToUnderlineNaming().ToUpper()}"", ""{tableExplain}"")]
-//[Serializable]
-//public class {tableName}Eo : FrameEo {{ ");
-//            foreach (var text in textList)
-//            {
-//                var items = text.Split('\t').ToList();
-//                if (items.Count == 1)
-//                {
-//                    items = text.Split(' ').ToList();
-//                }
-
-//                items = items.Where(x => x != "").ToList();
-//                if (items.Count > 0)
-//                {
-//                    sb.AppendLine("/// <summary>");
-//                    sb.AppendLine($"/// {items[col]}");
-//                    sb.AppendLine("/// </summary>");
-//                    sb.AppendLine(
-//                        $"[Column(\"{items[0].ToPascal().ToUnderlineNaming().ToUpper()}\", \"{items[col]}\")]");
-//                    sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
-//                    sb.AppendLine();
-//                }
-//            }
-
-//            sb.AppendLine("}");
-
-//            var entityClassStr = sb.ToString();
-//            GenerateEntityClass(generateCodeModel, entityClassStr);
-//            return sb.ToString();
-//        }
-
-
-//        private static void GenerateEntityClass(GenerateCodeModel generateCodeModel, string classStr)
-//        {
-//            //根据generateCodeModel.EntityPath生成txt文件
-
-//            if (!Directory.Exists(generateCodeModel.EntityPath))
-//            {
-//                Directory.CreateDirectory(generateCodeModel.EntityPath);
-//            }
-
-//            File.WriteAllText(generateCodeModel.EntityPath + "/" + generateCodeModel.TableName + ".cs", classStr);
-//        }
-
 
         /// <summary>
         /// 生成sql语句
@@ -331,6 +266,7 @@ namespace CodingTool.Functions
                         sb.AppendLine("/// <summary>");
                         sb.AppendLine($"/// {items[col]}");
                         sb.AppendLine("/// </summary>");
+                        sb.AppendLine($"[JsonProperty(\"{items[0]}\", DefaultValueHandling = DefaultValueHandling.Ignore)]");
                         sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
                         sb.AppendLine();
                     }
@@ -342,6 +278,54 @@ namespace CodingTool.Functions
             {
                 throw;
             }
+        }
+
+        public static string GenerateClassByJson(string inputText)
+        {
+
+            return GenerateClassFromJson(inputText, "Class1");
+
+        }
+
+        static string GenerateClassFromJson(string json, string className)
+        {
+            JObject jsonObject = JObject.Parse(json);
+            StringBuilder classBuilder = new StringBuilder();
+
+            classBuilder.AppendLine($"public class {className}");
+            classBuilder.AppendLine("{");
+
+            foreach (var property in jsonObject.Properties())
+            {
+                string propertyName = property.Name.ToPascal();
+                JToken propertyValue = property.Value;
+                string propertyType = DeterminePropertyType(propertyValue);
+
+                classBuilder.AppendLine($"    public {propertyType} {propertyName} {{ get; set; }}");
+            }
+
+            classBuilder.AppendLine("}");
+
+            return classBuilder.ToString();
+        }
+
+        static string DeterminePropertyType(JToken token)
+        {
+            if (token.Type == JTokenType.Integer)
+            {
+                return "int";
+            }
+            else if (token.Type == JTokenType.String)
+            {
+                return "string";
+            }
+            else if (token.Type == JTokenType.Object)
+            {
+                return "NestedClass"; // You can replace this with an appropriate class name
+            }
+            // Add more cases for other types as needed
+
+            return "object";
         }
     }
 }

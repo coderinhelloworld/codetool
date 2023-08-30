@@ -16,24 +16,25 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <materialDesign:DialogHost Identifier="main">
     <Border CornerRadius="25">
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Border Background="#292929" />
-        <Border Grid.Column="1" Background="#121212">
-            <StackPanel
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Background="#292929" />
+                <Border Grid.Column="1" Background="#121212">
+                    <StackPanel
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
-                <Button
+                        <Button
                     Width="25"
                     Height="25"
                     Margin="5"
@@ -41,9 +42,9 @@
                     FontSize="10"
                     Foreground="#6a6a6a"
                     Style="{StaticResource MaterialDesignIconButton}">
-                    <materialDesign:PackIcon Width="15" Kind="Minimize" />
-                </Button>
-                <Button
+                            <materialDesign:PackIcon Width="15" Kind="Minimize" />
+                        </Button>
+                        <Button
                     Width="25"
                     Height="25"
                     Margin="5"
@@ -51,9 +52,9 @@
                     FontSize="10"
                     Foreground="#6a6a6a"
                     Style="{StaticResource MaterialDesignIconButton}">
-                    <materialDesign:PackIcon Width="15" Kind="Maximize" />
-                </Button>
-                <Button
+                            <materialDesign:PackIcon Width="15" Kind="Maximize" />
+                        </Button>
+                        <Button
                     Width="25"
                     Height="25"
                     Margin="5"
@@ -61,45 +62,45 @@
                     FontSize="10"
                     Foreground="#6a6a6a"
                     Style="{StaticResource MaterialDesignIconButton}">
-                    <materialDesign:PackIcon Width="20" Kind="Close" />
-                </Button>
+                            <materialDesign:PackIcon Width="20" Kind="Close" />
+                        </Button>
 
-            </StackPanel>
-        </Border>
-        <Grid
+                    </StackPanel>
+                </Border>
+                <Grid
             Grid.Row="2"
             HorizontalAlignment="Stretch"
             Background="#292929">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <RowDefinition Height="326*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="Transparent">
-                    <Image Width="50"  Source="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\x.png">
-                    </Image>
-            </Grid>
-            <!--<Grid  Grid.Row="0" Background="Transparent"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="326*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="Transparent">
+                        <Image Width="50"  Source="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\x.png">
+                        </Image>
+                    </Grid>
+                    <!--<Grid  Grid.Row="0" Background="Transparent"  >
                 <Image Width="100" Height="100"  Source="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\logo.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image.Clip>
                         <RectangleGeometry Rect="60, 0, 110, 170"/>
                     </Image.Clip>
                 </Image>
             </Grid>-->
-            <!--<Grid  Grid.Row="0" Height="100">
+                    <!--<Grid  Grid.Row="0" Height="100">
                 <Grid.Background>
                     <ImageBrush ImageSource="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\logo.png" Viewbox="0,0,100,100" ViewboxUnits="RelativeToBoundingBox"/>
                 </Grid.Background>
             </Grid>-->
 
-            <ScrollViewer
+                    <ScrollViewer
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="Menu" Margin="10" />
-            </ScrollViewer>
-        </Grid>
-        <DockPanel
+                        <StackPanel x:Name="Menu" Margin="10" />
+                    </ScrollViewer>
+                </Grid>
+                <DockPanel
             x:Name="StackPanelMain"
             Grid.Row="2"
             Grid.Column="1"
@@ -107,6 +108,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="#121212" />
-    </Grid>
-    </Border>
+            </Grid>
+        </Border>
+    </materialDesign:DialogHost>
 </Window>

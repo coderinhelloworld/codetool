@@ -7,7 +7,16 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Controls\UserControlMenuItem.xaml.cs">
+    <Compile Update="Views\Controls\Dialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Controls\InfoDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Controls\Loading.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\GenerateByJson.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Pages\GenerateClassByProperty.xaml.cs">
@@ -27,7 +36,16 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Controls\UserControlMenuItem.xaml">
+    <Page Update="Views\Controls\Dialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Controls\InfoDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Controls\Loading.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\GenerateByJson.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\GenerateClassByProperty.xaml">

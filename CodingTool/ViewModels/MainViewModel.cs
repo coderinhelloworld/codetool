@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using CodingTool.Enums;
 using CodingTool.Extentions;
+using CodingTool.Global;
 
 namespace CodingTool.ViewModels
 {
@@ -35,6 +36,7 @@ namespace CodingTool.ViewModels
         public CommandBase MiniWindowCommand { get; set; }
         public CommandBase MaximizedWindowCommand { get; set; }
         public CommandBase GenetateClassByProertyCommand { get; set; }
+        public CommandBase GenetateClassByJsonCommand { get; set; }
 
         public MainViewModel()
         {
@@ -66,7 +68,7 @@ namespace CodingTool.ViewModels
             });
 
             #region 界面类
-            #endregion
+        
             CloseWindowCommand = new CommandBase(_ =>
             {
                 Application.Current.Shutdown();
@@ -86,11 +88,17 @@ namespace CodingTool.ViewModels
                     Application.Current.MainWindow.WindowState = WindowState.Maximized;
                 }
             });
+            #endregion
 
-
-            GenetateClassByProertyCommand=new CommandBase(_ =>
+            GenetateClassByProertyCommand = new CommandBase(_ =>
             {
+ 
                 OutputText = CodeGenerate.GenerateClassByProerty(InputText);
+            });
+            GenetateClassByJsonCommand= new CommandBase(_ =>
+            {
+
+                OutputText = CodeGenerate.GenerateClassByJson(InputText);
             });
 
         }
