@@ -74,6 +74,18 @@
          Style="{StaticResource MaterialDesignRaisedLightButton}"
          ToolTip="由Json生成类">
             <TextBlock Text="生成Class" />
+        </Button> 
+        <Button
+         Grid.Row="2"
+         Grid.Column="0"
+         Width="auto"
+         MaxWidth="200"
+         Margin="10"
+         HorizontalAlignment="Stretch"
+         Command="{Binding JsonFormateCommand}"
+         Style="{StaticResource MaterialDesignRaisedLightButton}"
+         ToolTip="Json格式化">
+            <TextBlock Text="格式化" />
         </Button>
     </Grid>
 </UserControl>

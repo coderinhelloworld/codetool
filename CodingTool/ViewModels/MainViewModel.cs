@@ -37,6 +37,7 @@ namespace CodingTool.ViewModels
         public CommandBase MaximizedWindowCommand { get; set; }
         public CommandBase GenetateClassByProertyCommand { get; set; }
         public CommandBase GenetateClassByJsonCommand { get; set; }
+        public CommandBase JsonFormateCommand { get; set; }
 
         public MainViewModel()
         {
@@ -99,6 +100,11 @@ namespace CodingTool.ViewModels
             {
 
                 OutputText = CodeGenerate.GenerateClassByJson(InputText);
+            });
+
+            JsonFormateCommand= new CommandBase(_ =>
+            {
+                OutputText = JsonHelper.ConvertJsonString(InputText);
             });
 
         }

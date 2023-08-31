@@ -23,19 +23,6 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <Button
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="auto"
-            MaxWidth="150"
-            Margin="20"
-            HorizontalAlignment="Stretch"
-             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"           
-            ToolTip="类生成测试方法">
-            <TextBlock Text="类生成测试方法" />
-            <Button.CommandParameter>
-                测试中
-            </Button.CommandParameter>
-        </Button>
+      
     </Grid>
 </UserControl>
