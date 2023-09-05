@@ -3,9 +3,11 @@ using Microsoft.Xaml.Behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CodingTool.Behaviors
 {
@@ -45,18 +47,20 @@ namespace CodingTool.Behaviors
             }
         }
 
-        private static void PropertyChangedCallback(
-            DependencyObject dependencyObject,
-            DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void PropertyChangedCallback( DependencyObject dependencyObject,  DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             var behavior = dependencyObject as AvalonEditBehaviour;
-            if (behavior.AssociatedObject != null)
+            if (behavior !=null && behavior.AssociatedObject != null)
             {
                 var editor = behavior.AssociatedObject as TextEditor;
-                if (editor.Document != null)
+                if (editor.Document != null && dependencyPropertyChangedEventArgs.NewValue!=null)
                 {
                     var caretOffset = editor.CaretOffset;
                     editor.Document.Text = dependencyPropertyChangedEventArgs.NewValue.ToString();
+                    if (caretOffset > editor.CaretOffset)
+                    {
+                        caretOffset= editor.CaretOffset;
+                    }
                     editor.CaretOffset = caretOffset;
                 }
             }

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\fonts\JetBrainsMono.ttf" />
     <None Remove="assets\images\logo.png" />
     <None Remove="assets\images\x.jpg" />
     <None Remove="assets\images\x.png" />
@@ -19,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\fonts\JetBrainsMono.ttf" />
     <Resource Include="assets\images\logo.png" />
     <Resource Include="assets\images\x.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

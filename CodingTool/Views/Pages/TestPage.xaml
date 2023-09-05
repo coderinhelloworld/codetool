@@ -3,9 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:CodingTool.Views.Pages"
+    xmlns:local="clr-namespace:CodingTool.Behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:local1="clr-namespace:CodingTool.Behaviors"
     mc:Ignorable="d">
     <Grid
         Height="auto"
@@ -16,13 +18,31 @@
         ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-      
+        <avalonEdit:TextEditor
+     Name="TextEditor"
+     Grid.Row="0"
+     FontFamily="Consolas"
+     SyntaxHighlighting="C#"
+     FontSize="14"
+     WordWrap ="True"
+     LineNumbersForeground="#FF2B91AF"
+     ShowLineNumbers="True">
+            <i:Interaction.Behaviors>
+                <local:AvalonEditBehaviour GiveMeTheText="{Binding InputText}"/>
+                <!--<local:AvalonEditBehaviour SelectedText="{Binding SelectedString}"/>-->
+            </i:Interaction.Behaviors>
+            <avalonEdit:TextEditor.Options>
+                <avalonEdit:TextEditorOptions ShowSpaces="True" WordWrapIndentation="4" InheritWordWrapIndentation="true">
+                    <avalonEdit:TextEditorOptions.ColumnRulerPosition>
+                        <system:Int32>10</system:Int32>
+                    </avalonEdit:TextEditorOptions.ColumnRulerPosition>
+                </avalonEdit:TextEditorOptions>
+            </avalonEdit:TextEditor.Options>
+        </avalonEdit:TextEditor>
+
     </Grid>
 </UserControl>

@@ -7,6 +7,7 @@
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <FontFamily x:Key="JetBrainsMono">pack://application:,,,/CodingTool;component/assets/fonts/#JetBrains Mono</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme
                     BaseTheme="Light"
