@@ -33,28 +33,28 @@
          输入内容：
         </TextBlock>
         <avalonEdit:TextEditor
-Name="TextEditor"
-           FontFamily="pack://application:,,,/CodingTool;component/assets/fonts/#JetBrains Mono"
-            Grid.Row="0"
-       Grid.Column="1"
-       MinHeight="200"
-       Margin="10"
-SyntaxHighlighting="C#"
-FontSize="14"
-WordWrap ="True"
-LineNumbersForeground="#FF2B91AF"
-ShowLineNumbers="True">
+        Name="TextEditor"
+        FontFamily="pack://application:,,,/CodingTool;component/assets/fonts/#JetBrains Mono"
+        Grid.Row="0"
+        Grid.Column="1"
+        MinHeight="200"
+        Margin="10"
+        SyntaxHighlighting="C#"
+        FontSize="14"
+        WordWrap ="True"
+        LineNumbersForeground="#FF2B91AF"
+        ShowLineNumbers="True">
             <i:Interaction.Behaviors>
                 <local:AvalonEditBehaviour GiveMeTheText="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"/>
                 <!--<local:AvalonEditBehaviour SelectedText="{Binding SelectedString}"/>-->
             </i:Interaction.Behaviors>
-            <avalonEdit:TextEditor.Options>
+            <!--<avalonEdit:TextEditor.Options>
                 <avalonEdit:TextEditorOptions ShowSpaces="True" WordWrapIndentation="4" InheritWordWrapIndentation="true">
                     <avalonEdit:TextEditorOptions.ColumnRulerPosition>
                         <system:Int32>10</system:Int32>
                     </avalonEdit:TextEditorOptions.ColumnRulerPosition>
                 </avalonEdit:TextEditorOptions>
-            </avalonEdit:TextEditor.Options>
+            </avalonEdit:TextEditor.Options>-->
         </avalonEdit:TextEditor>
 
 

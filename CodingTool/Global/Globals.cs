@@ -11,4 +11,6 @@ public static class Globals
     public static Loading Loading { get; set; }
 
     public static DialogHelper DialogHelper = new DialogHelper();
+
+    public static MainWindow MainW { get; set; }
 }

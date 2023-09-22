@@ -72,11 +72,11 @@
             HorizontalAlignment="Stretch"
             Background="#292929">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
+                        <RowDefinition Height="150" />
                         <RowDefinition Height="326*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Background="Transparent">
-                        <Image Width="50"  Source="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\x.png">
+                        <Image Width="160"  Name="LogoImage"  Source="{Binding LogoPath,UpdateSourceTrigger=PropertyChanged}">
                         </Image>
                     </Grid>
                     <!--<Grid  Grid.Row="0" Background="Transparent"  >

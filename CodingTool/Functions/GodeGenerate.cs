@@ -301,6 +301,7 @@ namespace CodingTool.Functions
                 JToken propertyValue = property.Value;
                 string propertyType = DeterminePropertyType(propertyValue);
 
+                classBuilder.AppendLine($"    [JsonProperty(\"{property.Name}\")]");
                 classBuilder.AppendLine($"    public {propertyType} {propertyName} {{ get; set; }}");
             }
 

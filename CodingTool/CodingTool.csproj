@@ -10,9 +10,19 @@
 
   <ItemGroup>
     <None Remove="assets\fonts\JetBrainsMono.ttf" />
-    <None Remove="assets\images\logo.png" />
-    <None Remove="assets\images\x.jpg" />
-    <None Remove="assets\images\x.png" />
+    <None Remove="assets\images\logos\1.png" />
+    <None Remove="assets\images\logos\10.png" />
+    <None Remove="assets\images\logos\11.png" />
+    <None Remove="assets\images\logos\12.png" />
+    <None Remove="assets\images\logos\13.png" />
+    <None Remove="assets\images\logos\2.png" />
+    <None Remove="assets\images\logos\3.png" />
+    <None Remove="assets\images\logos\4.png" />
+    <None Remove="assets\images\logos\5.png" />
+    <None Remove="assets\images\logos\6.png" />
+    <None Remove="assets\images\logos\7.png" />
+    <None Remove="assets\images\logos\8.png" />
+    <None Remove="assets\images\logos\9.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +31,19 @@
 
   <ItemGroup>
     <Resource Include="assets\fonts\JetBrainsMono.ttf" />
-    <Resource Include="assets\images\logo.png" />
-    <Resource Include="assets\images\x.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="assets\images\logos\1.png" />
+    <Resource Include="assets\images\logos\10.png" />
+    <Resource Include="assets\images\logos\11.png" />
+    <Resource Include="assets\images\logos\12.png" />
+    <Resource Include="assets\images\logos\13.png" />
+    <Resource Include="assets\images\logos\2.png" />
+    <Resource Include="assets\images\logos\3.png" />
+    <Resource Include="assets\images\logos\4.png" />
+    <Resource Include="assets\images\logos\5.png" />
+    <Resource Include="assets\images\logos\6.png" />
+    <Resource Include="assets\images\logos\7.png" />
+    <Resource Include="assets\images\logos\8.png" />
+    <Resource Include="assets\images\logos\9.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,12 +53,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RazorEngineCore" Version="2022.8.1" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="assets\images\x.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
 </Project>

@@ -41,6 +41,9 @@ namespace CodingTool.ViewModels
 
         public MainViewModel()
         {
+            //获取主程序所在的目录
+            LogoPath = System.IO.Path.Combine("assets", "images", "logos", "1.png");
+
             _generateCodeModel = new GenerateCodeModel();
             CodeGenerateCommand = new CommandBase(_ =>
             {
@@ -48,11 +51,11 @@ namespace CodingTool.ViewModels
             });
             Yktv2SqlGenerateCommand = new CommandBase(_ =>
             {
-                OutputText= CodeGenerate.Yktv2SqlGenerateByClass(InputText);
+                OutputText = CodeGenerate.Yktv2SqlGenerateByClass(InputText);
             });
             SaveSettingCommand = new CommandBase(_ =>
             {
-                SettingHelper.SaveSetting(_generateCodeModel.SerializeObject(),SettingType.代码生成);
+                SettingHelper.SaveSetting(_generateCodeModel.SerializeObject(), SettingType.代码生成);
             });
             ImgToIcoCommand = new CommandBase(_ =>
             {
@@ -61,24 +64,24 @@ namespace CodingTool.ViewModels
             ChooseFileCommand = new CommandBase(_ =>
             {
 
-                InputText= SelectFileWpf();
+                InputText = SelectFileWpf();
             });
-            GenerateTestMethodsCommand=new CommandBase(_ =>
+            GenerateTestMethodsCommand = new CommandBase(_ =>
             {
                 OutputText = CodeGenerate.GenerateTestMethods(InputText);
             });
 
             #region 界面类
-        
+
             CloseWindowCommand = new CommandBase(_ =>
             {
                 Application.Current.Shutdown();
             });
-            MiniWindowCommand=new CommandBase(_ =>
+            MiniWindowCommand = new CommandBase(_ =>
             {
                 Application.Current.MainWindow.WindowState = WindowState.Minimized;
             });
-            MaximizedWindowCommand=new CommandBase(_ =>
+            MaximizedWindowCommand = new CommandBase(_ =>
             {
                 if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
                 {
@@ -93,21 +96,87 @@ namespace CodingTool.ViewModels
 
             GenetateClassByProertyCommand = new CommandBase(_ =>
             {
- 
+
                 OutputText = CodeGenerate.GenerateClassByProerty(InputText);
             });
-            GenetateClassByJsonCommand= new CommandBase(_ =>
+            GenetateClassByJsonCommand = new CommandBase(_ =>
             {
 
                 OutputText = CodeGenerate.GenerateClassByJson(InputText);
             });
 
-            JsonFormateCommand= new CommandBase(_ =>
+            JsonFormateCommand = new CommandBase(_ =>
             {
                 OutputText = JsonHelper.ConvertJsonString(InputText);
+
+
             });
 
+            // 启动一个新线程来模拟后台更新ImagePath的操作
+            //Thread updateThread = new Thread(UpdateImagePath);
+            //updateThread.Start();
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(0.07);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
+
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // 此处的代码在UI线程中执行，可以更新UI控件  
+            // 模拟更新ImagePath的操作
+            //if (LogoPath.Contains("x.png"))
+            //{
+            //    LogoPath = System.IO.Path.Combine("assets", "images", "x.jpg");
+            //}
+            //else
+            //{
+            //    LogoPath = System.IO.Path.Combine("assets", "images", "x.png");
+            //}
+
+            if (logoCount == 14)
+            {
+                logoCount = 1;
+            }
+            LogoPath = System.IO.Path.Combine("assets", "images", "logos", logoCount.ToString()+".png");
+            logoCount++;
+
+
+
+        }
+
+
+        private void UpdateImagePath()
+        {
+            while (true)
+            {
+
+
+
+                // 通过Dispatcher在UI线程中更新UI控件
+                Globals.MainW.Dispatcher.Invoke(() =>
+                {
+
+                    // 这里可以在UI线程中执行一些需要更新的操作
+                });
+
+                // 间隔1秒
+                Thread.Sleep(1000);
+            }
+        }
+
+
+
+
+        private int logoCount = 1;
+
+
+
+
+
+
         public string SelectFileWpf()
         {
             var openFileDialog = new Microsoft.Win32.OpenFileDialog()
@@ -123,6 +192,12 @@ namespace CodingTool.ViewModels
             {
                 return null;
             }
+        }
+        private string _logoPath;
+        public string LogoPath
+        {
+            get => _logoPath;
+            set => SetProperty(ref _logoPath, value);
         }
 
         /// <summary>
@@ -149,7 +224,7 @@ namespace CodingTool.ViewModels
 
 
         private GenerateCodeModel _generateCodeModel;
-    
+
         public GenerateCodeModel GenerateCodeModel
         {
             get => _generateCodeModel;
@@ -160,7 +235,7 @@ namespace CodingTool.ViewModels
         ///保存配置
         ///
         public CommandBase SaveSettingCommand { get; }
-        
+
         private ObservableCollection<ReceipViewModel> _ReceipItems = new ObservableCollection<ReceipViewModel>();
         public ObservableCollection<ReceipViewModel> ReceipItems
         {

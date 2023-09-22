@@ -18,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CodingTool.Global;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace CodingTool
 {
@@ -30,6 +32,7 @@ namespace CodingTool
         {
             InitializeComponent();
             this.DataContext = new MainViewModel();
+            Globals.MainW = this;
 
             var menuCode = new List<SubItem>();
             menuCode.Add(new SubItem("Yktv2 分层代码生成", new Yktv2AllLayersGenerate()));
@@ -38,32 +41,36 @@ namespace CodingTool
             menuCode.Add(new SubItem("通过Json生成代码", new GenerateByJson()));
             menuCode.Add(new SubItem("测试页面", new TestPage()));
             var menu1 = new ItemMenu("代码生成器", menuCode, PackIconKind.Code);
-            Globals.MenuListViews.Add(new UserControlMenuItem(menu1,this));
+            Globals.MenuListViews.Add(new UserControlMenuItem(menu1, this));
 
             var menuImage = new List<SubItem>();
             menuImage.Add(new SubItem("图片转换成Icon", new ImageToIco()));
             var menu2 = new ItemMenu("图片相关", menuImage, PackIconKind.Image);
-            Globals.MenuListViews.Add(new UserControlMenuItem(menu2,this));
+            Globals.MenuListViews.Add(new UserControlMenuItem(menu2, this));
 
             var menuStrings = new List<SubItem>();
             menuStrings.Add(new SubItem("多字符串替换", new StringsReplace()));
             var menu3 = new ItemMenu("字符串处理", menuStrings, PackIconKind.StringLights);
-            Globals.MenuListViews.Add(new UserControlMenuItem(menu3,this));
-            
-            
-            foreach (var menuItem in     Globals.MenuListViews)
+            Globals.MenuListViews.Add(new UserControlMenuItem(menu3, this));
+            foreach (var menuItem in Globals.MenuListViews)
             {
                 Menu.Children.Add(menuItem);
             }
+
+
         }
+
+
+
+
         internal void SwitchScreen(object sender)
         {
             var screen = ((UserControl)sender);
 
-          
-                StackPanelMain.Children.Clear();
-                StackPanelMain.Children.Add(screen);
-     
+
+            StackPanelMain.Children.Clear();
+            StackPanelMain.Children.Add(screen);
+
 
         }
 
