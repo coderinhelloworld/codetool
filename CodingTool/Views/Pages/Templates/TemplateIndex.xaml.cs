@@ -1,5 +1,5 @@
-﻿using CodingTool.Global;
-using CodingTool.ViewModels;
+﻿
+using CodingTool.ViewModels.Templates;
 using System.Windows.Controls;
 
 namespace CodingTool.Views.Pages;

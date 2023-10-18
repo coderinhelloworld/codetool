@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodingTool.ViewModels;
+using CodingTool.ViewModels.Templates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +23,9 @@ namespace CodingTool.Views.Pages
     public partial class TtemplateEdit : UserControl
     {
         public TtemplateEdit()
-        {
+        {            
             InitializeComponent();
+            this.DataContext=new TtemplateEditModel();
         }
     }
 }

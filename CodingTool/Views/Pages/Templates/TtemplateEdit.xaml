@@ -43,9 +43,9 @@
              Command="{Binding AddTemplateCommand}"
               IsDefault="True"
               Style="{StaticResource MaterialDesignFlatButton}">
-                <Button.CommandParameter>
+                <!--<Button.CommandParameter>
                     <system:Boolean>True</system:Boolean>
-                </Button.CommandParameter>
+                </Button.CommandParameter>-->
                 ACCEPT
             </Button>
             <Button Margin="8,0,0,0"

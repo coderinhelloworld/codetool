@@ -18,6 +18,7 @@ using CodingTool.Extentions;
 using CodingTool.Global;
 using CoodingTool.Data;
 using CoodingTool.Data.models;
+using System.Windows.Input;
 
 namespace CodingTool.ViewModels
 {
@@ -27,34 +28,34 @@ namespace CodingTool.ViewModels
         ///生成代码命令及相关字段
         /// </summary>
 
-        public CommandBase CodeGenerateCommand { get; }
-        public CommandBase Yktv2SqlGenerateCommand { get; }
-        public CommandBase ImgToIcoCommand { get; }
-        public CommandBase ChooseFileCommand { get; }
+        public ICommand CodeGenerateCommand { get; }
+        public ICommand Yktv2SqlGenerateCommand { get; }
+        public ICommand ImgToIcoCommand { get; }
+        public ICommand ChooseFileCommand { get; }
 
-        public CommandBase GenerateTestMethodsCommand { get; }
+        public ICommand GenerateTestMethodsCommand { get; }
 
-        public CommandBase CloseWindowCommand { get; set; }
-        public CommandBase MiniWindowCommand { get; set; }
-        public CommandBase MaximizedWindowCommand { get; set; }
-        public CommandBase GenetateClassByProertyCommand { get; set; }
-        public CommandBase GenetateClassByJsonCommand { get; set; }
-        public CommandBase JsonFormateCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
+        public ICommand MiniWindowCommand { get; set; }
+        public ICommand MaximizedWindowCommand { get; set; }
+        public ICommand GenetateClassByProertyCommand { get; set; }
+        public ICommand GenetateClassByJsonCommand { get; set; }
+        public ICommand JsonFormateCommand { get; set; }
 
         /// <summary>
         /// 生成一卡通实体类
         /// </summary>
-        public CommandBase GenetateYktEoClassByProertyCommand { get; set; }
+        public ICommand GenetateYktEoClassByProertyCommand { get; set; }
 
         /// <summary>
         /// 生成sql建表语句
         /// </summary>
-        public CommandBase GetSqlCreateTableCommand { get; set; }
+        public ICommand GetSqlCreateTableCommand { get; set; }
 
         /// <summary>
         /// 查找读取函数中的读块包含更改的
         /// </summary>
-        public CommandBase FindChangeSqlInReadFunctionCommand { get; set; }
+        public ICommand FindChangeSqlInReadFunctionCommand { get; set; }
 
         public MainViewModel()
         {

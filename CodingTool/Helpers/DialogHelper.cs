@@ -40,6 +40,7 @@ namespace CodingTool.Helpers
         /// <param name="dialogName"></param>
         public async void MessageTips(string message, string dialogName="main")
         {
+            CloseDialog();
             var infoDialog = new InfoDialog
             {
                 Message = { Text = message }

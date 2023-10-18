@@ -11,15 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace CodingTool.ViewModels
+namespace CodingTool.ViewModels.Templates
 {
     public class TemplateIndexViewModel : ViewModelBase
     {
-        public CommandBase AddTemplateCommand { get; }
 
-        public CommandBase RunDialogCommand { get; }
+        public ICommand RunDialogCommand { get; }
 
         public TemplateIndexViewModel()
         {
@@ -34,31 +34,14 @@ namespace CodingTool.ViewModels
             TemplateItems = list;
 
             RunDialogCommand = new CommandBase(ExecuteRunDialog);
-            AddTemplateCommand = new CommandBase(_ =>
-            {
-                Globals.DialogHelper.MessageTips("成功");
-            });
+  
         }
 
-        private void ExecuteAddTemplate(object? obj)
-        {
-       
-        }
 
         private async void ExecuteRunDialog(object? _)
         {
-            //let's set up a little MVVM, cos that's what the cool kids are doing:
-            var view = new TtemplateEdit
-            {
-                //DataContext = new TtemplateEdit()
-            };
-
-            //show the dialog
-            //var result = await DialogHost.Show(view, "RootDialog", null, ClosingEventHandler, ClosedEventHandler);
+            var view = new TtemplateEdit();
             var result = await DialogHost.Show(view, "main", null, null, null);
-
-            //check the result...
-            Debug.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
         }
 
         private ObservableCollection<Template> _Template = new ObservableCollection<Template>();
