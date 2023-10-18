@@ -63,18 +63,55 @@
          Text="{Binding OutputText, UpdateSourceTrigger=PropertyChanged}"
          TextWrapping="Wrap"
          VerticalScrollBarVisibility="Auto" />
-               
-        <Button
-         Grid.Row="2"
-         Grid.Column="1"
-         Width="auto"
-         MaxWidth="150"
-         Margin="10"
-         HorizontalAlignment="Stretch"
-         Command="{Binding GenetateClassByProertyCommand}"
-         Style="{StaticResource MaterialDesignRaisedLightButton}"
-         ToolTip="由字段和注释生成类">
-            <TextBlock Text="生成Class" />
-        </Button>
+
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button
+       Grid.Column="0"
+       Width="auto"
+       MaxWidth="150"
+       Margin="10"
+       HorizontalAlignment="Stretch"
+       Command="{Binding GenetateClassByProertyCommand}"
+                     Foreground="White"
+       Style="{StaticResource MaterialDesignRaisedLightButton}"
+       ToolTip="由字段和注释生成类">
+                <TextBlock Text="生成Class" />
+            </Button>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="auto"
+                MaxWidth="150"
+                Margin="10"
+                     Foreground="White"
+                HorizontalAlignment="Stretch"
+                Command="{Binding GenetateYktEoClassByProertyCommand}"
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                ToolTip="由字段和注释生成类">
+                <TextBlock Text="生成YKTEoClass" />
+            </Button>
+
+            <Button
+            Grid.Row="0"
+            Grid.Column="2"
+            Width="auto"
+            MaxWidth="150"
+            Margin="10"
+            Foreground="White"
+            HorizontalAlignment="Stretch"
+            Command="{Binding GetSqlCreateTableCommand}"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="由字段和注释生成类">
+                <TextBlock Text="sql创建语句" />
+            </Button>
+        </Grid>
     </Grid>
+
 </UserControl>

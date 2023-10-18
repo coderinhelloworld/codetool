@@ -16,6 +16,8 @@ using System.Windows.Threading;
 using CodingTool.Enums;
 using CodingTool.Extentions;
 using CodingTool.Global;
+using CoodingTool.Data;
+using CoodingTool.Data.models;
 
 namespace CodingTool.ViewModels
 {
@@ -38,6 +40,21 @@ namespace CodingTool.ViewModels
         public CommandBase GenetateClassByProertyCommand { get; set; }
         public CommandBase GenetateClassByJsonCommand { get; set; }
         public CommandBase JsonFormateCommand { get; set; }
+
+        /// <summary>
+        /// 生成一卡通实体类
+        /// </summary>
+        public CommandBase GenetateYktEoClassByProertyCommand { get; set; }
+
+        /// <summary>
+        /// 生成sql建表语句
+        /// </summary>
+        public CommandBase GetSqlCreateTableCommand { get; set; }
+
+        /// <summary>
+        /// 查找读取函数中的读块包含更改的
+        /// </summary>
+        public CommandBase FindChangeSqlInReadFunctionCommand { get; set; }
 
         public MainViewModel()
         {
@@ -71,6 +88,25 @@ namespace CodingTool.ViewModels
                 OutputText = CodeGenerate.GenerateTestMethods(InputText);
             });
 
+            GenetateYktEoClassByProertyCommand=new CommandBase(_ =>
+            {
+                OutputText = CodeGenerate.GenerateYktEoClass(InputText);
+            });
+            GetSqlCreateTableCommand = new CommandBase(_ =>
+            {
+                OutputText = CodeGenerate.GetSqlCreateTable(InputText);
+            });
+            FindChangeSqlInReadFunctionCommand=new CommandBase(_ =>
+            {
+                //异步执行
+                Task task = Task.Run(() =>
+                {
+                    TxtHandler.FindChangeSqlInFuntions(InputText);
+                });
+  
+            });
+
+
             #region 界面类
 
             CloseWindowCommand = new CommandBase(_ =>
@@ -93,7 +129,6 @@ namespace CodingTool.ViewModels
                 }
             });
             #endregion
-
             GenetateClassByProertyCommand = new CommandBase(_ =>
             {
 
@@ -112,71 +147,26 @@ namespace CodingTool.ViewModels
 
             });
 
-            // 启动一个新线程来模拟后台更新ImagePath的操作
-            //Thread updateThread = new Thread(UpdateImagePath);
-            //updateThread.Start();
 
+            //定时切换logo
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0.07);
+            timer.Interval = TimeSpan.FromSeconds(0.12);
             timer.Tick += Timer_Tick;
             timer.Start();
+
         }
 
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // 此处的代码在UI线程中执行，可以更新UI控件  
-            // 模拟更新ImagePath的操作
-            //if (LogoPath.Contains("x.png"))
-            //{
-            //    LogoPath = System.IO.Path.Combine("assets", "images", "x.jpg");
-            //}
-            //else
-            //{
-            //    LogoPath = System.IO.Path.Combine("assets", "images", "x.png");
-            //}
-
             if (logoCount == 14)
             {
                 logoCount = 1;
             }
             LogoPath = System.IO.Path.Combine("assets", "images", "logos", logoCount.ToString()+".png");
             logoCount++;
-
-
-
         }
-
-
-        private void UpdateImagePath()
-        {
-            while (true)
-            {
-
-
-
-                // 通过Dispatcher在UI线程中更新UI控件
-                Globals.MainW.Dispatcher.Invoke(() =>
-                {
-
-                    // 这里可以在UI线程中执行一些需要更新的操作
-                });
-
-                // 间隔1秒
-                Thread.Sleep(1000);
-            }
-        }
-
-
-
-
         private int logoCount = 1;
-
-
-
-
-
-
         public string SelectFileWpf()
         {
             var openFileDialog = new Microsoft.Win32.OpenFileDialog()
@@ -236,30 +226,30 @@ namespace CodingTool.ViewModels
         ///
         public CommandBase SaveSettingCommand { get; }
 
-        private ObservableCollection<ReceipViewModel> _ReceipItems = new ObservableCollection<ReceipViewModel>();
-        public ObservableCollection<ReceipViewModel> ReceipItems
-        {
-            get
-            {
-                return _ReceipItems;
-            }
-            set
-            {
-                if (value == null || value.Count < 1)
-                    return;
-                //清空原先的列表
-                // thisWindow.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-                // {
-                //     _ReceipItems.Clear();
-                //     //向列表中加入单词块
-                //     foreach (ReceipViewModel poppingWord in value)
-                //     {
-                //         _ReceipItems.Add(poppingWord);
-                //     }
-                // });
+        //private ObservableCollection<Template> _Template = new ObservableCollection<Template>();
+        //public ObservableCollection<Template> TemplateItems
+        //{
+        //    get
+        //    {
+        //        return _Template;
+        //    }
+        //    set
+        //    {
+        //        if (value == null || value.Count < 1)
+        //            return;
+        //        //清空原先的列表
+        //        Globals.MainW.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+        //        {
+        //            _Template.Clear();
+        //            //向列表中加入单词块
+        //            foreach (Template poppingWord in value)
+        //            {
+        //                TemplateItems.Add(poppingWord);
+        //            }
+        //        });
 
-            }
-        }
+        //    }
+        //}
 
     }
 }

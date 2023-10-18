@@ -20,6 +20,8 @@ using System.Windows.Shapes;
 using CodingTool.Global;
 using System.Threading;
 using System.Windows.Threading;
+using CoodingTool.Data;
+using System.Windows.Forms;
 
 namespace CodingTool
 {
@@ -30,15 +32,24 @@ namespace CodingTool
     {
         public MainWindow()
         {
-            InitializeComponent();
-            this.DataContext = new MainViewModel();
             Globals.MainW = this;
+            InitializeComponent();
+            //初始化数据库
+            using (var context =new SqlLiteDbContext())
+            {
+                context.Database.EnsureCreated();
+            }
+            this.DataContext = new MainViewModel();
+ 
+
+
 
             var menuCode = new List<SubItem>();
             menuCode.Add(new SubItem("Yktv2 分层代码生成", new Yktv2AllLayersGenerate()));
             menuCode.Add(new SubItem("通过类生成代码", new GenerateSqlByYktv2Class()));
             menuCode.Add(new SubItem("通过字段生成代码", new GenerateClassByProperty()));
             menuCode.Add(new SubItem("通过Json生成代码", new GenerateByJson()));
+            menuCode.Add(new SubItem("文件夹文本处理", new DicTxtHandler()));
             menuCode.Add(new SubItem("测试页面", new TestPage()));
             var menu1 = new ItemMenu("代码生成器", menuCode, PackIconKind.Code);
             Globals.MenuListViews.Add(new UserControlMenuItem(menu1, this));
@@ -49,7 +60,7 @@ namespace CodingTool
             Globals.MenuListViews.Add(new UserControlMenuItem(menu2, this));
 
             var menuStrings = new List<SubItem>();
-            menuStrings.Add(new SubItem("多字符串替换", new StringsReplace()));
+            menuStrings.Add(new SubItem("多字符串替换", new TemplateIndex()));
             var menu3 = new ItemMenu("字符串处理", menuStrings, PackIconKind.StringLights);
             Globals.MenuListViews.Add(new UserControlMenuItem(menu3, this));
             foreach (var menuItem in Globals.MenuListViews)
@@ -65,7 +76,7 @@ namespace CodingTool
 
         internal void SwitchScreen(object sender)
         {
-            var screen = ((UserControl)sender);
+            var screen = ((System.Windows.Controls.UserControl)sender);
 
 
             StackPanelMain.Children.Clear();

@@ -17,6 +17,7 @@ namespace CodingTool.Functions
     {
         public static void Generate(GenerateCodeModel generateCodeModel)
         {
+            generateCodeModel.TableName = generateCodeModel.TableName.ToPascal();
             var currentPath = Directory.GetCurrentDirectory();
             var projectRootPath = ExtractPathBeforeBin(currentPath);
             string yktBoTemplateContent =
@@ -327,6 +328,102 @@ namespace CodingTool.Functions
             // Add more cases for other types as needed
 
             return "object";
+        }
+
+
+        public static string GenerateYktEoClass(string inputText)
+        {
+            var className = "";
+            var col =1;
+            var sb = new StringBuilder();
+            var textList = inputText.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+            if (textList.Count() == 1)
+            {
+                textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
+            }
+            sb.AppendLine($@"[Table(""{className.ToUnderlineNaming().ToUpper()}"", """")]
+[Serializable]
+public class {className}Eo : FrameEo {{ ");
+            foreach (var text in textList)
+            {
+                var items = text.Split('\t').ToList();
+                if (items.Count == 1)
+                {
+                    items = text.Split(' ').ToList();
+                }
+                items = items.Where(x => x != "").ToList();
+                if (items.Count > 0)
+                {
+                    sb.AppendLine("/// <summary>");
+                    sb.AppendLine($"/// {items[col]}");
+                    sb.AppendLine("/// </summary>");
+                    sb.AppendLine($"[Column(\"{items[0].ToPascal().ToUnderlineNaming().ToUpper()}\", \"{items[col]}\")]");
+                    sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
+                    sb.AppendLine();
+                }
+            }
+            sb.AppendLine("}");
+            return sb.ToString();
+        }
+
+        internal static string GetSqlCreateTable(string inputText)
+        {
+            var className = "tableName";
+            var col = 1;
+            var tableCrateSql = new StringBuilder();
+            tableCrateSql.AppendLine($"create table {className.ToUnderlineNaming().ToUpper()} (");
+            var textList = GetTextSplitLineList(inputText);
+            var count = 1;
+            foreach (var text in textList)
+            {
+                var items = GetLineSplitTextList(text);
+                if (items.Count > 0)
+                {
+                    if (count++ == textList.Count())
+                    {
+                        tableCrateSql.AppendLine($"{items[0].ToPascal().ToUnderlineNaming().ToUpper()} nvarchar(100) ");
+                    }
+                    else
+                    {
+                        tableCrateSql.AppendLine($"{items[0].ToPascal().ToUnderlineNaming().ToUpper()} nvarchar(100), ");
+                    }
+
+                }
+            }
+            //去除掉sb最后的,
+
+
+            tableCrateSql.AppendLine(" ) go");
+
+            foreach (var text in textList)
+            {
+                var items = GetLineSplitTextList(text);
+                if (items.Count > 0)
+                {
+                    tableCrateSql.AppendLine($" exec sp_addextendedproperty 'MS_Description', '{items[col]}', 'SCHEMA', 'dbo', 'TABLE', '{className.ToUnderlineNaming().ToUpper()}', 'COLUMN', '{items[0].ToPascal().ToUnderlineNaming().ToUpper()}'  go");
+                }
+            }
+            return tableCrateSql.ToString();
+        }
+        private static List<string> GetTextSplitLineList(string inputText)
+        {
+
+            var textList = inputText.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+            if (textList.Count() == 1)
+            {
+                textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
+            }
+            return textList;
+        }
+        private static List<string> GetLineSplitTextList(string text)
+        {
+
+            var items = text.Split('\t').ToList();
+            if (items.Count == 1)
+            {
+                items = text.Split(' ').ToList();
+            }
+            return items.Where(x => x.IsNullOrEmpty() == false).ToList();
         }
     }
 }

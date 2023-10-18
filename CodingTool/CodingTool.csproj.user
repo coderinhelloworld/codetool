@@ -16,6 +16,9 @@
     <Compile Update="Views\Controls\Loading.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\DicTxtHandler.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\GenerateByJson.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -26,6 +29,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Pages\TestPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\Templates\TtemplateEdit.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Pages\Yktv2AllLayersGenerate.xaml.cs">
@@ -45,6 +51,9 @@
     <Page Update="Views\Controls\Loading.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Pages\DicTxtHandler.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Pages\GenerateByJson.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -55,6 +64,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\TestPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\Templates\TtemplateEdit.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\Yktv2AllLayersGenerate.xaml">
