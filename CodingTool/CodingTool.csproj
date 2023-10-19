@@ -48,14 +48,17 @@
 
   <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="MaterialDesignColors" Version="3.0.0-ci344" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RazorEngineCore" Version="2022.8.1" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CodingTool.Services\CodingTool.Services.csproj" />
     <ProjectReference Include="..\CoodingTool.Data\CoodingTool.Data.csproj" />
   </ItemGroup>
 

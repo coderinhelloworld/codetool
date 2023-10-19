@@ -8,74 +8,92 @@
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit" 
                  xmlns:local="clr-namespace:CodingTool.Behaviors"             
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="500">
+             >
     <!---->
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="60"  MaxHeight="60"/>
             <RowDefinition Height="*" />
-            <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
-        <Button      Grid.Row="0" Width="128"
-          Command="{Binding RunDialogCommand}"
-          Content="RUN CODE" />
-        <DataGrid         
-            Grid.Row="1"
-                           ItemsSource="{Binding TemplateItems }" Height="600" VerticalContentAlignment="Center"
-                  CanUserAddRows="False" AutoGenerateColumns="False">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Height" Value="120" />
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+        <StackPanel  Margin="0 0 10 0" Name="stackpanel1" Orientation="Horizontal" VerticalAlignment="Center" >
+            <Button     Margin="10"
+              Style="{StaticResource MaterialDesignOutlinedButton}"
+              Width="128"
+              Command="{Binding QueryListCommand}"
+              Content="查询" />     
+            <Button   
+              Style="{StaticResource MaterialDesignOutlinedButton}"
+              Width="128"
+              Command="{Binding RunDialogCommand}"
+              Content="新增" />
+        </StackPanel>
+        <ScrollViewer           Grid.Row="1">
+            <DataGrid     
+                PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
+            IsReadOnly="True"    
+            materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
+            ItemsSource="{Binding TemplateItems }" 
+            VerticalContentAlignment="Center"
+            CanUserAddRows="False"
+            AutoGenerateColumns="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="MinHeight" Value="30"/>
+                        <Setter Property="Height" Value="Auto"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
                                         ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                         EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                    <DataGridCheckBoxColumn.Header>
-                        <Border Background="Transparent">
-                            <!--<CheckBox  IsChecked="{Binding IsAllItems1Selected, Source={StaticResource DataContextProxy}}" />-->
-                        </Border>
-                    </DataGridCheckBoxColumn.Header>
-                    <DataGridCheckBoxColumn.HeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
+                        <DataGridCheckBoxColumn.Header>
+                            <Border Background="Transparent">
+                                <!--<CheckBox  IsChecked="{Binding IsAllItems1Selected, Source={StaticResource DataContextProxy}}" />-->
+                            </Border>
+                        </DataGridCheckBoxColumn.Header>
+                        <DataGridCheckBoxColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}"
                                BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                        </Style>
-                    </DataGridCheckBoxColumn.HeaderStyle>
-                </DataGridCheckBoxColumn>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id"
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridCheckBoxColumn.HeaderStyle>
+                    </DataGridCheckBoxColumn>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"
                                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="名称"
+                    <DataGridTextColumn Binding="{Binding Group}" Header="组别"
                                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <DataGridTextColumn Header="Description">
-                    <DataGridTextColumn.Binding>
-                        <Binding Path="Description">
-                        </Binding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
-                <DataGridTemplateColumn Header="图像" Width="SizeToCells">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Path=ImgUrl}" Height="200" Width="200" VerticalAlignment="Center"
-                                   HorizontalAlignment="Center" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button HorizontalAlignment="Center" FontSize="10" Height="25"
+                    <DataGridTextColumn Binding="{Binding Title}" Header="名称"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                    <DataGridTextColumn Header="内容" Width="200" >
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Content">
+                            </Binding>
+                        </DataGridTextColumn.Binding>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="MaxHeight" Value="100"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button HorizontalAlignment="Center" FontSize="10" 
                                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                         VerticalAlignment="Center" Content="删 除"
                                         Style="{StaticResource MaterialDesignOutlinedButton}" Tag="{Binding Sort}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

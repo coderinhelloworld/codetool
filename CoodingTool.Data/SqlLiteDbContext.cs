@@ -10,7 +10,7 @@ namespace CoodingTool.Data
 {
     public class SqlLiteDbContext : DbContext
     {
-        public DbSet<Template> Templates { get; set; }
+        public DbSet<Template> Template { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

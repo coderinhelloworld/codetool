@@ -79,25 +79,12 @@
                         <Image Width="160"  Name="LogoImage"  Source="{Binding LogoPath,UpdateSourceTrigger=PropertyChanged}">
                         </Image>
                     </Grid>
-                    <!--<Grid  Grid.Row="0" Background="Transparent"  >
-                <Image Width="100" Height="100"  Source="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\logo.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image.Clip>
-                        <RectangleGeometry Rect="60, 0, 110, 170"/>
-                    </Image.Clip>
-                </Image>
-            </Grid>-->
-                    <!--<Grid  Grid.Row="0" Height="100">
-                <Grid.Background>
-                    <ImageBrush ImageSource="D:\Projects\MyGitProject\codetool\CodingTool\assets\images\logo.png" Viewbox="0,0,100,100" ViewboxUnits="RelativeToBoundingBox"/>
-                </Grid.Background>
-            </Grid>-->
-
                     <ScrollViewer
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto">
-                        <StackPanel x:Name="Menu" Margin="10" />
+                        <StackPanel        PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" x:Name="Menu" Margin="10" />
                     </ScrollViewer>
                 </Grid>
                 <DockPanel

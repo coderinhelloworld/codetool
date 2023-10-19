@@ -11,6 +11,9 @@ using System.Windows.Input;
 
 namespace CodingTool.Behaviors
 {
+    /// <summary>
+    /// 用于AvalonEdit的双向绑定
+    /// </summary>
     public sealed class AvalonEditBehaviour : Behavior<TextEditor>
     {
         public static readonly DependencyProperty GiveMeTheTextProperty =

@@ -60,8 +60,8 @@ namespace CodingTool
             Globals.MenuListViews.Add(new UserControlMenuItem(menu2, this));
 
             var menuStrings = new List<SubItem>();
-            menuStrings.Add(new SubItem("多字符串替换", new TemplateIndex()));
-            var menu3 = new ItemMenu("字符串处理", menuStrings, PackIconKind.StringLights);
+            menuStrings.Add(new SubItem("代码模板", new TemplateIndex()));
+            var menu3 = new ItemMenu("模板管理", menuStrings, PackIconKind.CodeBlockHtml);
             Globals.MenuListViews.Add(new UserControlMenuItem(menu3, this));
             foreach (var menuItem in Globals.MenuListViews)
             {
@@ -91,6 +91,23 @@ namespace CodingTool
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
+            }
+        }
+
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (sender is UIElement element)
+            {
+                e.Handled = true;
+
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = UIElement.MouseWheelEvent,
+                    Source = sender
+                };
+
+                element.RaiseEvent(eventArg);
             }
         }
     }
