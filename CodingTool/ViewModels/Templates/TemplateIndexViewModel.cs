@@ -21,18 +21,26 @@ namespace CodingTool.ViewModels.Templates
     public class TemplateIndexViewModel : ViewModelBase
     {
 
-        public ICommand RunDialogCommand { get; }
+        public ICommand AddTemplateCommand { get; }
         public ICommand QueryListCommand { get; }
+        public ICommand EditTemplateCommand { get; }
 
         public  TemplateIndexViewModel()
         {
-            RunDialogCommand = new CommandBase(ExecuteRunDialog);
+            AddTemplateCommand = new CommandBase(AddTemplateAction);
             QueryListCommand = new CommandBase(QueryTemplateList);
+            EditTemplateCommand=new CommandBase(ExecuteEditTemplate);
             // 注册消息接收器
             Messenger.Default.Register<NotificationMessage>(this, HandleMessage);
         }
-        private void HandleMessage(NotificationMessage message)
+
+        private void ExecuteEditTemplate(object? obj)
         {
+            throw new NotImplementedException();
+        }
+
+        private void HandleMessage(NotificationMessage message)
+        {            
             if (message.Notification == "QueryTemplateList")
             {
                 // 这里处理收到的消息
@@ -51,7 +59,7 @@ namespace CodingTool.ViewModels.Templates
             }
             TemplateItems = list;
         }
-        private async void ExecuteRunDialog(object? _)
+        private async void AddTemplateAction(object? _)
         {
             var view = new TtemplateEdit();
             var result = await DialogHost.Show(view, "main", null, null, null);

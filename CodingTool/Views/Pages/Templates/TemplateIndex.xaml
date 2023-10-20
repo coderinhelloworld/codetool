@@ -24,8 +24,14 @@
             <Button   
               Style="{StaticResource MaterialDesignOutlinedButton}"
               Width="128"
-              Command="{Binding RunDialogCommand}"
+              Command="{Binding AddCommand}"
               Content="新增" />
+            <Button   
+               Style="{StaticResource MaterialDesignOutlinedButton}"
+               Width="128"
+               Command="{Binding EditCommand}"
+               Content="编辑" 
+                />
         </StackPanel>
         <ScrollViewer           Grid.Row="1">
             <DataGrid     

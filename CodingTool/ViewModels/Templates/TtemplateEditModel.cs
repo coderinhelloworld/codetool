@@ -15,11 +15,11 @@ namespace CodingTool.ViewModels.Templates
 {
     public class TtemplateEditModel : ViewModelBase
     {
-        public ICommand AddTemplateCommand { get; }
+        public ICommand ConfirmAddCommand { get; }
 
         public TtemplateEditModel()
         {
-            AddTemplateCommand = new CommandBase(ExecuteAddTemplate);
+            ConfirmAddCommand = new CommandBase(ExecuteAddTemplate);
         }
 
         private void ExecuteAddTemplate(object? obj)
@@ -38,7 +38,6 @@ namespace CodingTool.ViewModels.Templates
                     CreateTime = DateTime.Now,
                     UpdateTime = DateTime.Now
                 };
-
                 context.Template.Add(template);
                 context.SaveChanges();
             }

@@ -71,10 +71,6 @@ namespace CodingTool.ViewModels
             {
                 OutputText = CodeGenerate.Yktv2SqlGenerateByClass(InputText);
             });
-            SaveSettingCommand = new CommandBase(_ =>
-            {
-                SettingHelper.SaveSetting(_generateCodeModel.SerializeObject(), SettingType.代码生成);
-            });
             ImgToIcoCommand = new CommandBase(_ =>
             {
                 ImageFunctions.ImageToIco(InputText);
@@ -221,36 +217,6 @@ namespace CodingTool.ViewModels
             get => _generateCodeModel;
             set => SetProperty(ref _generateCodeModel, value);
         }
-
-
-        ///保存配置
-        ///
-        public CommandBase SaveSettingCommand { get; }
-
-        //private ObservableCollection<Template> _Template = new ObservableCollection<Template>();
-        //public ObservableCollection<Template> TemplateItems
-        //{
-        //    get
-        //    {
-        //        return _Template;
-        //    }
-        //    set
-        //    {
-        //        if (value == null || value.Count < 1)
-        //            return;
-        //        //清空原先的列表
-        //        Globals.MainW.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-        //        {
-        //            _Template.Clear();
-        //            //向列表中加入单词块
-        //            foreach (Template poppingWord in value)
-        //            {
-        //                TemplateItems.Add(poppingWord);
-        //            }
-        //        });
-
-        //    }
-        //}
 
     }
 }
