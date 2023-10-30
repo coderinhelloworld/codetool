@@ -1,5 +1,5 @@
 ﻿
-using CodingTool.ViewModels.Templates;
+using CodingTool.Views.ViewModels.Templates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

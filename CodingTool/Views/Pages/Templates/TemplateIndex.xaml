@@ -16,27 +16,26 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel  Margin="0 0 10 0" Name="stackpanel1" Orientation="Horizontal" VerticalAlignment="Center" >
-            <Button     Margin="10"
+            <Button     Margin="20 10 10 10"
               Style="{StaticResource MaterialDesignOutlinedButton}"
-              Width="128"
+              Width="60"
               Command="{Binding QueryListCommand}"
               Content="查询" />     
-            <Button   
-              Style="{StaticResource MaterialDesignOutlinedButton}"
-              Width="128"
-              Command="{Binding AddCommand}"
-              Content="新增" />
-            <Button   
-               Style="{StaticResource MaterialDesignOutlinedButton}"
-               Width="128"
-               Command="{Binding EditCommand}"
-               Content="编辑" 
-                />
+            <Button    Margin="10"
+                       Style="{StaticResource MaterialDesignOutlinedButton}"
+                       Width="60"
+                       Command="{Binding AddCommand}"
+                       Content="新增" />
+            <Button    Margin="10"
+                       Style="{StaticResource MaterialDesignOutlinedButton}"
+                       Width="60"
+                       Command="{Binding EditCommand}"
+                       Content="编辑" 
+            />
         </StackPanel>
         <ScrollViewer           Grid.Row="1">
-            <DataGrid     
-                PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
-            IsReadOnly="True"    
+            <DataGrid                                         
+                PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"  
             materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
             ItemsSource="{Binding TemplateItems }" 
             VerticalContentAlignment="Center"
@@ -100,6 +99,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
-
     </Grid>
 </UserControl>

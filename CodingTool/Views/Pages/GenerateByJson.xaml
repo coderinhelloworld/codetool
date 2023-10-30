@@ -6,7 +6,9 @@
                  xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit" 
                  xmlns:local="clr-namespace:CodingTool.Behaviors"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:viewmodels="clr-namespace:CodingTool.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:viewmodels="clr-namespace:CodingTool.ViewModels"
+             xmlns:viewModels="clr-namespace:CodingTool.Views.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid

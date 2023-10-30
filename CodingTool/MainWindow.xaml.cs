@@ -22,6 +22,7 @@ using System.Threading;
 using System.Windows.Threading;
 using CoodingTool.Data;
 using System.Windows.Forms;
+using CodingTool.Views.ViewModels;
 
 namespace CodingTool
 {
@@ -49,8 +50,7 @@ namespace CodingTool
             menuCode.Add(new SubItem("通过类生成代码", new GenerateSqlByYktv2Class()));
             menuCode.Add(new SubItem("通过字段生成代码", new GenerateClassByProperty()));
             menuCode.Add(new SubItem("通过Json生成代码", new GenerateByJson()));
-            menuCode.Add(new SubItem("文件夹文本处理", new DicTxtHandler()));
-            menuCode.Add(new SubItem("测试页面", new TestPage()));
+            menuCode.Add(new SubItem("文本处理", new DicTxtHandler()));
             var menu1 = new ItemMenu("代码生成器", menuCode, PackIconKind.Code);
             Globals.MenuListViews.Add(new UserControlMenuItem(menu1, this));
 

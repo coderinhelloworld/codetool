@@ -1,5 +1,5 @@
 ﻿using CodingTool.ViewModels;
-using CodingTool.ViewModels.Templates;
+using CodingTool.Views.ViewModels.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
