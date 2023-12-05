@@ -1,4 +1,4 @@
-﻿using CodingTool.Extentions;
+﻿using CodingCommon.Extentions;
 using CodingTool.ViewModels.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -17,7 +17,7 @@ namespace CodingTool.Functions
     {
         public static void Generate(GenerateCodeModel generateCodeModel)
         {
-            generateCodeModel.TableName = generateCodeModel.TableName.ToPascal();
+            generateCodeModel.TableName = generateCodeModel.TableName.ToNamingTitleCase();
             var currentPath = Directory.GetCurrentDirectory();
             var projectRootPath = ExtractPathBeforeBin(currentPath);
             string yktBoTemplateContent =
@@ -90,7 +90,7 @@ namespace CodingTool.Functions
             {
                 string columnName = columnMatch.Groups[1].Value;
                 //正则表达式获取"public"+任意内容+columnName
-                string pattern2 = @"public.*?" + columnName.ToPascal();
+                string pattern2 = @"public.*?" + columnName.ToNamingTitleCase();
                 Match match2 = Regex.Match(classString, pattern2);
                 if (!match2.Success)
                 {
@@ -262,13 +262,13 @@ namespace CodingTool.Functions
                     {
                         items = text.Split(' ');
                     }
-                    if (text.IsNotNullOrEmpty() && items.Length > 0)
+                    if (text.IsNotNullOrEmpty() && items.Length > 0 && items[0].IsNotNullOrEmpty())
                     {
                         sb.AppendLine("/// <summary>");
                         sb.AppendLine($"/// {items[col]}");
                         sb.AppendLine("/// </summary>");
                         sb.AppendLine($"[JsonProperty(\"{items[0]}\", DefaultValueHandling = DefaultValueHandling.Ignore)]");
-                        sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
+                        sb.AppendLine($" public string {items[0].ToNamingTitleCase()} {{get;set;}}");
                         sb.AppendLine();
                     }
                 }
@@ -298,7 +298,7 @@ namespace CodingTool.Functions
 
             foreach (var property in jsonObject.Properties())
             {
-                string propertyName = property.Name.ToPascal();
+                string propertyName = property.Name.ToNamingTitleCase();
                 JToken propertyValue = property.Value;
                 string propertyType = DeterminePropertyType(propertyValue);
 
@@ -341,7 +341,7 @@ namespace CodingTool.Functions
             {
                 textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
             }
-            sb.AppendLine($@"[Table(""{className.ToUnderlineNaming().ToUpper()}"", """")]
+            sb.AppendLine($@"[Table(""{className.ToNamingLowerSnakeCase().ToUpper()}"", """")]
 [Serializable]
 public class {className}Eo : FrameEo {{ ");
             foreach (var text in textList)
@@ -357,8 +357,8 @@ public class {className}Eo : FrameEo {{ ");
                     sb.AppendLine("/// <summary>");
                     sb.AppendLine($"/// {items[col]}");
                     sb.AppendLine("/// </summary>");
-                    sb.AppendLine($"[Column(\"{items[0].ToPascal().ToUnderlineNaming().ToUpper()}\", \"{items[col]}\")]");
-                    sb.AppendLine($" public string {items[0].ToPascal()} {{get;set;}}");
+                    sb.AppendLine($"[Column(\"{items[0].ToNamingUpperSnakeCase()}\", \"{items[col]}\")]");
+                    sb.AppendLine($" public string {items[0].ToNamingTitleCase()} {{get;set;}}");
                     sb.AppendLine();
                 }
             }
@@ -371,7 +371,7 @@ public class {className}Eo : FrameEo {{ ");
             var className = "tableName";
             var col = 1;
             var tableCrateSql = new StringBuilder();
-            tableCrateSql.AppendLine($"create table {className.ToUnderlineNaming().ToUpper()} (");
+            tableCrateSql.AppendLine($"create table {className.ToNamingLowerSnakeCase().ToUpper()} (");
             var textList = GetTextSplitLineList(inputText);
             var count = 1;
             foreach (var text in textList)
@@ -381,11 +381,11 @@ public class {className}Eo : FrameEo {{ ");
                 {
                     if (count++ == textList.Count())
                     {
-                        tableCrateSql.AppendLine($"{items[0].ToPascal().ToUnderlineNaming().ToUpper()} nvarchar(100) ");
+                        tableCrateSql.AppendLine($"{items[0].ToNamingUpperSnakeCase()} nvarchar(100) ");
                     }
                     else
                     {
-                        tableCrateSql.AppendLine($"{items[0].ToPascal().ToUnderlineNaming().ToUpper()} nvarchar(100), ");
+                        tableCrateSql.AppendLine($"{items[0].ToNamingUpperSnakeCase()} nvarchar(100), ");
                     }
 
                 }
@@ -400,7 +400,7 @@ public class {className}Eo : FrameEo {{ ");
                 var items = GetLineSplitTextList(text);
                 if (items.Count > 0)
                 {
-                    tableCrateSql.AppendLine($" exec sp_addextendedproperty 'MS_Description', '{items[col]}', 'SCHEMA', 'dbo', 'TABLE', '{className.ToUnderlineNaming().ToUpper()}', 'COLUMN', '{items[0].ToPascal().ToUnderlineNaming().ToUpper()}'  go");
+                    tableCrateSql.AppendLine($" exec sp_addextendedproperty 'MS_Description', '{items[col]}', 'SCHEMA', 'dbo', 'TABLE', '{className.ToNamingLowerSnakeCase().ToUpper()}', 'COLUMN', '{items[0].ToNamingUpperSnakeCase()}'  go");
                 }
             }
             return tableCrateSql.ToString();

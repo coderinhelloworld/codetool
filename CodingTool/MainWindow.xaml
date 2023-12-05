@@ -16,6 +16,10 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <!--WindowChrome-->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
     <materialDesign:DialogHost Identifier="main">
     <Border CornerRadius="25">
             <Grid >
@@ -34,6 +38,16 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
+                        <Button
+                    Width="25"
+                    Height="25"
+                    Margin="5"
+                    Command="{Binding ShowSettingCommand}"
+                    FontSize="10"
+                    Foreground="#6a6a6a"
+                    Style="{StaticResource MaterialDesignIconButton}">
+                            <materialDesign:PackIcon Width="15" Kind="Cog" />
+                        </Button>
                         <Button
                     Width="25"
                     Height="25"

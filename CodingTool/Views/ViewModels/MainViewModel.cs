@@ -3,20 +3,9 @@ using CodingTool.Functions;
 using CodingTool.Helpers;
 using CodingTool.ViewModels.Models;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
-using CodingTool.Extentions;
-using CodingTool.Global;
-using CoodingTool.Data;
-using CoodingTool.Data.models;
 using System.Windows.Input;
 
 namespace CodingTool.Views.ViewModels
@@ -34,6 +23,7 @@ namespace CodingTool.Views.ViewModels
 
         public ICommand GenerateTestMethodsCommand { get; }
 
+        public ICommand ShowSettingCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
         public ICommand MiniWindowCommand { get; set; }
         public ICommand MaximizedWindowCommand { get; set; }

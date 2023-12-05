@@ -11,10 +11,11 @@ namespace CodingTool.Services.TextHandler
     public static class TextHelper
     {
 
+        //替换sql中的参数
         public static string GetFullSql(string input)
         {
 
-            var inputText = input;
+            var inputText = input+" ";
             //v3中参数替换
             if (inputText.Contains("[Parameters=["))
             {

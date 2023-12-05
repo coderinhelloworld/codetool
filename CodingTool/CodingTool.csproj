@@ -58,8 +58,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CodingCommon\CodingCommon.csproj" />
     <ProjectReference Include="..\CodingTool.Services\CodingTool.Services.csproj" />
     <ProjectReference Include="..\CoodingTool.Data\CoodingTool.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extentions\" />
   </ItemGroup>
 
 </Project>
