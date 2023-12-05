@@ -253,3 +253,4 @@ paket-files/
 
 # GUI
 src/AbpVnextPro.GUI.ConsoleApp/Logs/logs.txt
+/.vs/CodingTool/v17/.suo
