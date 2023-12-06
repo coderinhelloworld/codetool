@@ -2,11 +2,16 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>bin\Debug\net6.0-windows\ImageOutPut\repair-tools.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Extentions\**" />
+    <EmbeddedResource Remove="Extentions\**" />
+    <None Remove="Extentions\**" />
+    <Page Remove="Extentions\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="assets\fonts\JetBrainsMono.ttf" />
@@ -61,10 +66,6 @@
     <ProjectReference Include="..\CodingCommon\CodingCommon.csproj" />
     <ProjectReference Include="..\CodingTool.Services\CodingTool.Services.csproj" />
     <ProjectReference Include="..\CoodingTool.Data\CoodingTool.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extentions\" />
   </ItemGroup>
 
 </Project>
