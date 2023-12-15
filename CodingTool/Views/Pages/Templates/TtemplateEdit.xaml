@@ -56,7 +56,7 @@
                 Margin="0,16,0,0"
                 Orientation="Horizontal">
             <Button 
-             Command="{Binding AddTemplateCommand}"
+             Command="{Binding ConfirmAddCommand}"
               IsDefault="True"
               Style="{StaticResource MaterialDesignFlatButton}">
                 确认

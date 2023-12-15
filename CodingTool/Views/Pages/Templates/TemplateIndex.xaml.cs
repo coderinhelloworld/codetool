@@ -1,5 +1,7 @@
 ﻿
+using AutoMapper;
 using CodingTool.Views.ViewModels.Templates;
+using GalaSoft.MvvmLight.Messaging;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,11 +11,11 @@ namespace CodingTool.Views.Pages;
 
 public partial class TemplateIndex : UserControl
 {
-    public TemplateIndex()
+    public TemplateIndex( )
     {
         InitializeComponent();
         this.DataContext = new TemplateIndexViewModel();
-
+        Messenger.Default.Send(new NotificationMessage("QueryTemplateList"));
     }
     private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
@@ -29,6 +31,7 @@ public partial class TemplateIndex : UserControl
 
             element.RaiseEvent(eventArg);
         }
+        
     }
 
 

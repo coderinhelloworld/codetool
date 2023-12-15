@@ -11,6 +11,7 @@ namespace CoodingTool.Data
     public class SqlLiteDbContext : DbContext
     {
         public DbSet<Template> Template { get; set; }
+        public DbSet<SettingInfo> SettingInfo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

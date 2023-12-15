@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public static class ExtensionObject
+public static class ObjectExtension
 {
     /// <summary>
     /// 将对象转化为JSON格式的字符串
@@ -16,4 +16,7 @@ public static class ExtensionObject
     {
         return JsonConvert.SerializeObject(obj);
     }
+
+
+
 }

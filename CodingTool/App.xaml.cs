@@ -1,6 +1,10 @@
-﻿using CodingTool.Global;
+﻿using AutoMapper;
+using CodingTool.Global;
+using CodingTool.Services.AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -25,6 +29,7 @@ namespace CodingTool
             this.Exit += new ExitEventHandler(App_Exit);
         }
 
+        public IServiceProvider ServiceProvider { get; private set; }
         void App_Startup(object sender, StartupEventArgs e)
         {
             CheckApplicationMutex();
@@ -34,6 +39,25 @@ namespace CodingTool
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             //非UI线程未捕获异常处理事件
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            // 设置依赖注入
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+
+            ServiceProvider = services.BuildServiceProvider();
+        }
+
+        private void ConfigureServices(IServiceCollection services)
+        {
+            // 注册 AutoMapper
+            services.AddAutoMapper(typeof(App).Assembly);
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<OrganizationProfile>();
+                // 添加其他 Profile
+            });
+            // 构建 IMapper 实例
+            var mapper = config.CreateMapper();
+            GlobalData.Mapper = mapper;
         }
 
         void App_Exit(object sender, ExitEventArgs e)
@@ -47,12 +71,12 @@ namespace CodingTool
             {
                 e.Handled = true; //把 Handled 属性设为true，表示此异常已处理，程序可以继续运行，不会强制退出
                                   //
-               Globals.DialogHelper.MessageTips("UI线程异常:" + e.Exception.Message);                
+               GlobalData.DialogHelper.MessageTips("UI线程异常:" + e.Exception.Message);                
             }
             catch (Exception ex)
             {
                 //此时程序出现严重异常，将强制结束退出
-                Globals.DialogHelper.MessageTips("UI线程发生致命错误");
+                GlobalData.DialogHelper.MessageTips("UI线程发生致命错误");
             }
 
         }
@@ -73,13 +97,13 @@ namespace CodingTool
             {
                 sbEx.Append(e.ExceptionObject);
             }
-            Globals.DialogHelper.MessageTips(sbEx.ToString());
+            GlobalData.DialogHelper.MessageTips(sbEx.ToString());
         }
 
         void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             //task线程内未处理捕获
-           Globals.DialogHelper.MessageTips("Task线程异常：" + e.Exception.Message);
+           GlobalData.DialogHelper.MessageTips("Task线程异常：" + e.Exception.Message);
             e.SetObserved();//设置该异常已察觉（这样处理后就不会引起程序崩溃）
         }
 
@@ -117,6 +141,8 @@ namespace CodingTool
                 Environment.Exit(0);
             }
         }
+
+
 
         #region Windows API
 

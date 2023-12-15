@@ -9,13 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoodingTool.Data", "Cooding
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingTool.Services", "CodingTool.Services\CodingTool.Services.csproj", "{78F00D41-039E-41C1-AE61-688582570B1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCommon", "CodingCommon\CodingCommon.csproj", "{B7907BED-48D8-44BD-ADFE-61E0D6BF3BE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingCommon", "CodingCommon\CodingCommon.csproj", "{B7907BED-48D8-44BD-ADFE-61E0D6BF3BE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCommonTests", "CodingCommonTests\CodingCommonTests.csproj", "{A7C2B96E-A5A8-4A10-82A5-24AB600393AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingCommonTests", "CodingCommonTests\CodingCommonTests.csproj", "{A7C2B96E-A5A8-4A10-82A5-24AB600393AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingToolTests", "CodingToolTests\CodingToolTests.csproj", "{57AF4BC0-13B2-4741-8C14-926F3D85CABB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingToolTests", "CodingToolTests\CodingToolTests.csproj", "{57AF4BC0-13B2-4741-8C14-926F3D85CABB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8EC8D38D-7DCE-4A75-A987-638AA4B1BF07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingTool.Models", "CodingTool.Models\CodingTool.Models.csproj", "{27E2411D-5809-407D-9FD8-3370C9B6BC1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{57AF4BC0-13B2-4741-8C14-926F3D85CABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57AF4BC0-13B2-4741-8C14-926F3D85CABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57AF4BC0-13B2-4741-8C14-926F3D85CABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E2411D-5809-407D-9FD8-3370C9B6BC1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E2411D-5809-407D-9FD8-3370C9B6BC1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E2411D-5809-407D-9FD8-3370C9B6BC1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E2411D-5809-407D-9FD8-3370C9B6BC1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

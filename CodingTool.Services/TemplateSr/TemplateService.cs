@@ -17,7 +17,26 @@ namespace CodingTool.Services.TemplateSr
         {
             using (var context = new SqlLiteDbContext())
             {
-                return await context.Template.ToListAsync();
+                var res= await context.Template.ToListAsync();
+                return res;
+            }
+        }
+
+        public async void DeleteById(int id)
+        {
+            using (var context = new SqlLiteDbContext())
+            {
+                context.Remove(await GetTemplateById(id));
+                context.SaveChanges();
+            }
+        }
+
+         public async Task<Template> GetTemplateById(int id)
+        {
+            using (var context = new SqlLiteDbContext())
+            {
+              var res=  await context.FindAsync<Template>(id);
+                return res;
             }
         }
 

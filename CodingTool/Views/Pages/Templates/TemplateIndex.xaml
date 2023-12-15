@@ -24,17 +24,18 @@
             <Button    Margin="10"
                        Style="{StaticResource MaterialDesignOutlinedButton}"
                        Width="60"
-                       Command="{Binding AddCommand}"
+                       Command="{Binding AddTemplateCommand}"
                        Content="新增" />
             <Button    Margin="10"
                        Style="{StaticResource MaterialDesignOutlinedButton}"
                        Width="60"
-                       Command="{Binding EditCommand}"
+                       Command="{Binding EditTemplateCommand}"
+                     CommandParameter="{Binding ElementName=TemplateItems, Path=SelectedItem}"                       
                        Content="编辑" 
             />
         </StackPanel>
         <ScrollViewer           Grid.Row="1">
-            <DataGrid                                         
+            <DataGrid                
                 PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"  
             materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
             ItemsSource="{Binding TemplateItems }" 
@@ -47,8 +48,8 @@
                         <Setter Property="Height" Value="Auto"/>
                     </Style>
                 </DataGrid.RowStyle>
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid.Columns >
+                    <DataGridCheckBoxColumn    Binding="{Binding IsSeleted, UpdateSourceTrigger=PropertyChanged}"
                                         ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                         EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
                         <DataGridCheckBoxColumn.Header>
@@ -63,7 +64,7 @@
                             </Style>
                         </DataGridCheckBoxColumn.HeaderStyle>
                     </DataGridCheckBoxColumn>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"
+                    <DataGridTextColumn Binding="{Binding Id}" Header="序号"
                                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                     <DataGridTextColumn Binding="{Binding Group}" Header="组别"
@@ -90,7 +91,8 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button HorizontalAlignment="Center" FontSize="10" 
                                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                        VerticalAlignment="Center" Content="删 除"
+                                        CommandParameter="{Binding}"
+                                        VerticalAlignment="Center" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" Content="删 除"
                                         Style="{StaticResource MaterialDesignOutlinedButton}" Tag="{Binding Sort}" />
                                 </StackPanel>
                             </DataTemplate>

@@ -1,4 +1,7 @@
 ﻿using CodingCommon.Extentions;
+using CodingTool.Models.Enums.System;
+using CodingTool.Services.Extensions;
+using CodingTool.Services.System;
 using CodingTool.ViewModels.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -268,7 +271,7 @@ namespace CodingTool.Functions
                         sb.AppendLine($"/// {items[col]}");
                         sb.AppendLine("/// </summary>");
                         sb.AppendLine($"[JsonProperty(\"{items[0]}\", DefaultValueHandling = DefaultValueHandling.Ignore)]");
-                        sb.AppendLine($" public string {items[0].ToNamingTitleCase()} {{get;set;}}");
+                        sb.AppendLine($" public string {items[0].ToSystemNamingCase()} {{get;set;}}");
                         sb.AppendLine();
                     }
                 }
@@ -303,7 +306,7 @@ namespace CodingTool.Functions
                 string propertyType = DeterminePropertyType(propertyValue);
 
                 classBuilder.AppendLine($"    [JsonProperty(\"{property.Name}\")]");
-                classBuilder.AppendLine($"    public {propertyType} {propertyName} {{ get; set; }}");
+                classBuilder.AppendLine($"    public {propertyType} {propertyName.ToSystemNamingCase()} {{ get; set; }}");
             }
 
             classBuilder.AppendLine("}");
@@ -341,7 +344,7 @@ namespace CodingTool.Functions
             {
                 textList = inputText.Split(new string[] { "\n" }, StringSplitOptions.None).ToList();
             }
-            sb.AppendLine($@"[Table(""{className.ToNamingLowerSnakeCase().ToUpper()}"", """")]
+            sb.AppendLine($@"[Table(""{className.ToNamingUpperSnakeCase()}"", """")]
 [Serializable]
 public class {className}Eo : FrameEo {{ ");
             foreach (var text in textList)
@@ -358,7 +361,7 @@ public class {className}Eo : FrameEo {{ ");
                     sb.AppendLine($"/// {items[col]}");
                     sb.AppendLine("/// </summary>");
                     sb.AppendLine($"[Column(\"{items[0].ToNamingUpperSnakeCase()}\", \"{items[col]}\")]");
-                    sb.AppendLine($" public string {items[0].ToNamingTitleCase()} {{get;set;}}");
+                    sb.AppendLine($" public string {items[0]} {{get;set;}}");
                     sb.AppendLine();
                 }
             }

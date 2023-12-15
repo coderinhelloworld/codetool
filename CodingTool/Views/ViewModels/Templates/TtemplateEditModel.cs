@@ -10,6 +10,8 @@ using System.Windows.Input;
 using CoodingTool.Data.models;
 using CodingTool.Services.TemplateSr;
 using GalaSoft.MvvmLight.Messaging;
+using CodingTool.Views.ViewModels.TemplateDtos;
+using CodingTool.Models.Entities.Template.dto;
 
 namespace CodingTool.Views.ViewModels.Templates
 {
@@ -19,26 +21,48 @@ namespace CodingTool.Views.ViewModels.Templates
 
         public TtemplateEditModel()
         {
-            ConfirmAddCommand = new CommandBase(ExecuteAddTemplate);
+            ConfirmAddCommand = new CommandBase(Confirm);
+            TemplateDtoData.propertyChangedHandler += (val) =>
+            {
+                _title=val.Title;
+                _content = val.Content;
+                _group = val.Group;
+                _id = val.Id;
+            };
         }
 
-        private void ExecuteAddTemplate(object? obj)
+        private void Confirm(object? obj)
         {
-            Globals.DialogHelper.MessageTips("成功");
+            GlobalData.DialogHelper.MessageTips("成功");
             using (var context = new SqlLiteDbContext())
             {
-                var current = context.Template.OrderByDescending(x => x.Id).FirstOrDefault();
-
-                Template template = new Template
+                if (Id > 0)
                 {
-                    Id = (current == null ? 1 : current.Id) + 1,
-                    Title = Title,
-                    Group = Group,
-                    Content = Content,
-                    CreateTime = DateTime.Now,
-                    UpdateTime = DateTime.Now
-                };
-                context.Template.Add(template);
+
+                    var template = context.Template.FirstOrDefault(x => x.Id == Id);
+                    if(template==null) return;
+                    template.Title = Title;
+                    template.Content = Content;
+                    template.Group = Group;
+                    template.UpdateTime = DateTime.Now;
+                    context.Template.Update(template);
+                }
+                else
+                {
+                    var current = context.Template.OrderByDescending(x => x.Id).FirstOrDefault();
+
+                    Template template = new Template
+                    {
+                        Id = (current == null ? 1 : current.Id) + 1,
+                        Title = Title,
+                        Group = Group,
+                        Content = Content,
+                        CreateTime = DateTime.Now,
+                        UpdateTime = DateTime.Now
+                    };
+                    context.Template.Add(template);
+                }
+
                 context.SaveChanges();
             }
             // 发送消息
@@ -46,6 +70,15 @@ namespace CodingTool.Views.ViewModels.Templates
 
         }
 
+        /// <summary>
+        /// ID
+        /// </summary>
+        private int _id;
+        public int Id
+        {
+            get => _id;
+            set => SetProperty(ref _id, value);
+        }
 
 
         /// <summary>

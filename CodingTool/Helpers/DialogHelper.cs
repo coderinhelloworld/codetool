@@ -19,7 +19,7 @@ namespace CodingTool.Helpers
         public async void LoadingDialog(string name)
         {
             var loading = new Loading();
-            Globals.Loading = loading;
+            GlobalData.Loading = loading;
             await MaterialDesignThemes.Wpf.DialogHost.Show(loading, name);
         }
 

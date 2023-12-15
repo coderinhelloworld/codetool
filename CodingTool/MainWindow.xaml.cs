@@ -23,6 +23,8 @@ using System.Windows.Threading;
 using CoodingTool.Data;
 using System.Windows.Forms;
 using CodingTool.Views.ViewModels;
+using AutoMapper;
+using CodingTool.Services.AutoMapper;
 
 namespace CodingTool
 {
@@ -33,7 +35,7 @@ namespace CodingTool
     {
         public MainWindow()
         {
-            Globals.MainW = this;
+            GlobalData.MainW = this;
             InitializeComponent();
             //初始化数据库
             using (var context =new SqlLiteDbContext())
@@ -52,18 +54,18 @@ namespace CodingTool
             menuCode.Add(new SubItem("通过Json生成代码", new GenerateByJson()));
             menuCode.Add(new SubItem("文本处理", new DicTxtHandler()));
             var menu1 = new ItemMenu("代码生成器", menuCode, PackIconKind.Code);
-            Globals.MenuListViews.Add(new UserControlMenuItem(menu1, this));
+            GlobalData.MenuListViews.Add(new UserControlMenuItem(menu1, this));
 
             var menuImage = new List<SubItem>();
             menuImage.Add(new SubItem("图片转换成Icon", new ImageToIco()));
             var menu2 = new ItemMenu("图片相关", menuImage, PackIconKind.Image);
-            Globals.MenuListViews.Add(new UserControlMenuItem(menu2, this));
+            GlobalData.MenuListViews.Add(new UserControlMenuItem(menu2, this));
 
             var menuStrings = new List<SubItem>();
             menuStrings.Add(new SubItem("代码模板", new TemplateIndex()));
             var menu3 = new ItemMenu("模板管理", menuStrings, PackIconKind.CodeBlockHtml);
-            Globals.MenuListViews.Add(new UserControlMenuItem(menu3, this));
-            foreach (var menuItem in Globals.MenuListViews)
+            GlobalData.MenuListViews.Add(new UserControlMenuItem(menu3, this));
+            foreach (var menuItem in GlobalData.MenuListViews)
             {
                 Menu.Children.Add(menuItem);
             }

@@ -21,7 +21,7 @@
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
     </WindowChrome.WindowChrome>
     <materialDesign:DialogHost Identifier="main">
-    <Border CornerRadius="25">
+        <Border CornerRadius="25">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35" />
@@ -38,16 +38,42 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
-                        <Button
-                    Width="25"
-                    Height="25"
-                    Margin="5"
-                    Command="{Binding ShowSettingCommand}"
-                    FontSize="10"
-                    Foreground="#6a6a6a"
-                    Style="{StaticResource MaterialDesignIconButton}">
-                            <materialDesign:PackIcon Width="15" Kind="Cog" />
-                        </Button>
+                        <materialDesign:PopupBox   PlacementMode="BottomAndAlignRightEdges" StaysOpen="True">
+                            <materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PackIcon Kind="Cog"   Foreground="{DynamicResource PrimaryHueDarkBrush}"   />
+                            </materialDesign:PopupBox.ToggleContent>
+            
+                            <StackPanel>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Margin="10" DockPanel.Dock="Left" Orientation="Horizontal">
+                                        <Label FontSize="15" FontWeight="Bold" VerticalAlignment="Center" >命名方式:</Label>
+                                        <ItemsControl ItemsSource="{Binding RadioButtons}" >
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <RadioButton Margin="5" Style="{StaticResource MaterialDesignLightRadioButton}" Content="{Binding Content}" IsChecked="{Binding IsCheck}" GroupName="RadioButtons" Command="{Binding DataContext.RadioCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}">
+                                                    </RadioButton>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
                         <Button
                     Width="25"
                     Height="25"

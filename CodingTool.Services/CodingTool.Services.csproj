@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodingCommon\CodingCommon.csproj" />
+    <ProjectReference Include="..\CodingTool.Models\CodingTool.Models.csproj" />
     <ProjectReference Include="..\CoodingTool.Data\CoodingTool.Data.csproj" />
   </ItemGroup>
 

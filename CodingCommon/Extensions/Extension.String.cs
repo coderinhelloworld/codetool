@@ -31,6 +31,8 @@ namespace CodingCommon.Extentions
             return sanitizedString.ToUpperInvariant();
         }
 
+
+
         /// <summary>
         /// 小写下划线连接,hello_my_world
         /// </summary>
@@ -105,14 +107,23 @@ namespace CodingCommon.Extentions
             sanitizedString = Regex.Replace(sanitizedString, @"[\W_]+", "-");
             return sanitizedString.ToLowerInvariant();
         }
+
+
+
         #endregion
 
 
         /// <summary>
+        /// 反序列化
+        /// </summary>
+        public static T DeserializeObject<T>(this string obj)
+        {
+            return JsonConvert.DeserializeObject<T>(obj);
+        }
+
+        /// <summary>
         /// 转为bool
         /// </summary>
-        /// <param name="str">字符串</param>
-        /// <returns></returns>
         public static bool ToBool(this string str)
         {
             return bool.Parse(str);

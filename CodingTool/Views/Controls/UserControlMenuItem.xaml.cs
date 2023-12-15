@@ -77,7 +77,7 @@ namespace CodingTool.Views.Controls
 
             //更改其他listView的背景色
             var listViewSelected = sender as ListView;
-            foreach (var item in Globals.MenuListViews)
+            foreach (var item in GlobalData.MenuListViews)
             {
                 item.SetIconColor("Blue");
                 if (item is UserControlMenuItem)

@@ -12,17 +12,17 @@ namespace CodingTool.Helpers
     {
         public static void ShowMsg(string msg)
         {
-            Globals.MainW.Dispatcher.Invoke(new Action(delegate
+            GlobalData.MainW.Dispatcher.Invoke(new Action(delegate
             {
-                ((MainViewModel)Globals.MainW.DataContext).OutputText = msg;
+                ((MainViewModel)GlobalData.MainW.DataContext).OutputText = msg;
                 //要做的事
             }));
         }
         public static void AppendMsg(string msg)
         {
-            Globals.MainW.Dispatcher.Invoke(new Action(delegate
+            GlobalData.MainW.Dispatcher.Invoke(new Action(delegate
             {
-                ((MainViewModel)Globals.MainW.DataContext).OutputText +="\r\n"+ msg;
+                ((MainViewModel)GlobalData.MainW.DataContext).OutputText +="\r\n"+ msg;
             }));
         }
     }
